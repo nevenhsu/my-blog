@@ -1,0 +1,11 @@
+.mantine-Button-root {
+  font-weight: bold;
+}
+
+.mantine-Text-root {
+  font-family: var(--font-body);
+}
+
+.mantine-List-item::marker {
+  color: var(--mantine-color-dimmed);
+}

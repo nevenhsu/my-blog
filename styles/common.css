@@ -1,0 +1,46 @@
+body {
+  background: var(--mantine-color-body);
+}
+
+.c-pointer {
+  cursor: pointer;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.hide {
+  opacity: 0 !important;
+}
+
+.absolute-vertical {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.absolute-horizontal {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.relative-horizontal {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.relative-vertical {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

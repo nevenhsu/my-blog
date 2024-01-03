@@ -1,0 +1,10 @@
+/* global styles */
+@import '../styles/variables.css';
+
+/* core styles are required for packages */
+@import '@mantine/core/styles.css';
+@import '@mantine/carousel/styles.css';
+
+/* overwrite styles */
+@import '../styles/mantine.css';
+@import '../styles/common.css';

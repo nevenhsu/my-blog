@@ -1,0 +1,30 @@
+.icon {
+  position: absolute;
+  opacity: 1;
+  transition: transform 400ms, opacity 250ms;
+}
+
+.icon-hide {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.header {
+  transition-duration: 500ms;
+}
+
+.header-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header-out {
+  transform: translateY(-100%);
+}
