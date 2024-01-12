@@ -35,7 +35,7 @@ export default function MyPassword({ slug, data }: { slug: string; data: Partial
 
   return (
     <>
-      <Stack gap={40} w={{ base: 320, sm: 332, xl: 400 }} mx="auto">
+      <Stack gap={40} w={{ base: 320, sm: 332, lg: 400 }} mx="auto">
         <Box>
           <MyTitle ta="center" mb={4}>
             Welcome!

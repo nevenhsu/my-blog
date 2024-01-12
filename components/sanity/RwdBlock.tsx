@@ -14,7 +14,7 @@ import classes from './index.module.css'
 const fullWidthData: Partial<BreakPointData<{ w: string }>> = {
   base: { w: '100%' },
   sm: { w: 'calc(100vw - 80px)' },
-  xl: { w: '1200px' },
+  lg: { w: '1200px' },
 }
 
 export function RwdBlock({ data }: { data: Partial<RwdData> }) {

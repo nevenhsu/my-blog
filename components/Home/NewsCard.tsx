@@ -18,10 +18,10 @@ export default function NewsCard({ data }: { data: Partial<NewsData> }) {
         onClick={() => (post?.slug ? router.push(`/blog/${post.slug}`) : null)}
       >
         <Box px={40} py={32}>
-          <Title fz={{ base: 20, xl: 26 }} mb={12}>
+          <Title fz={{ base: 20, lg: 24 }} mb={12}>
             {title}
           </Title>
-          <Text fz={{ base: 16, xl: 18 }}>{subtitle}</Text>
+          <Text fz={{ base: 16, lg: 18 }}>{subtitle}</Text>
         </Box>
         {asset ? <SanityImage image={asset} /> : null}
       </Stack>

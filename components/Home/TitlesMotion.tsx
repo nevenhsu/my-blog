@@ -20,7 +20,7 @@ export default function TitlesMotion({ data, duration, show }: TitlesMotionProps
   return (
     <Box pos="relative">
       <Title
-        fz={{ base: 64, sm: 132, xl: 160 }}
+        fz={{ base: 64, sm: 132, lg: 160 }}
         style={{
           opacity: 0,
           visibility: 'hidden',
@@ -103,7 +103,7 @@ function TitleMotion({
 
   return (
     <motion.div style={{ y, maskImage, WebkitMaskImage: maskImage }}>
-      <Title fz={{ base: 64, sm: 132, xl: 160 }}>{text}</Title>
+      <Title fz={{ base: 64, sm: 132, lg: 160 }}>{text}</Title>
     </motion.div>
   )
 }

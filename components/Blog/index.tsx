@@ -58,7 +58,6 @@ export default function Blog({ slug, initialData }: BlogProps) {
         h={{
           base: `calc(100dvh - ${headerHeight.base}px)`,
           sm: `calc(100dvh - ${headerHeight.sm}px)`,
-          xl: `calc(100dvh - ${headerHeight.xl}px)`,
         }}
       >
         <Stack h="100%" justify="center" align="center">
@@ -78,17 +77,20 @@ export default function Blog({ slug, initialData }: BlogProps) {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
           <Box
             className={clsx('absolute-horizontal', classes.bg, { hide: !title })}
-            top={{ base: '-72px', sm: '-80px', xl: '-120px' }}
-            h={{ base: 'calc(100% + 72px)', sm: 'calc(100% + 80px)', xl: 'calc(100% + 120px)' }}
+            top={{ base: `-${headerHeight.base}px`, sm: `-${headerHeight.sm}px` }}
+            h={{
+              base: `calc(100% + ${headerHeight.base}px)`,
+              sm: `calc(100% + ${headerHeight.sm}px)`,
+            }}
             style={{ w: '100vw', pointerEvents: 'none', background }}
           />
         </motion.div>
 
-        <Space h={{ base: 48, sm: 80, xl: 40 }} />
+        <Space h={{ base: 48, sm: 80, lg: 40 }} />
 
         {/*   Title   */}
         <MotionSlide delay={2}>
-          <Title fz={{ base: 20, sm: 28, xl: 44 }} mb={8}>
+          <Title fz={{ base: 20, sm: 28, lg: 44 }} mb={8}>
             {title}
           </Title>
         </MotionSlide>
@@ -120,8 +122,8 @@ export default function Blog({ slug, initialData }: BlogProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: isInit ? 0 : 2 }}
           >
-            <Box pos="relative" py={{ base: 40, sm: 60, xl: 80 }}>
-              <Box w={{ base: '100%', sm: '66.66%', xl: '60%' }} mx="auto">
+            <Box pos="relative" py={{ base: 40, sm: 60, lg: 80 }}>
+              <Box w={{ base: '100%', sm: '66.66%', lg: '60%' }} mx="auto">
                 <MyPortableText content={content || []} />
               </Box>
             </Box>

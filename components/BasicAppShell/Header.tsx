@@ -95,7 +95,7 @@ export default function Header() {
           <Box
             c="var(--mantine-color-text)"
             pos="relative"
-            w={{ base: 30, sm: 40, xl: 50 }}
+            w={{ base: 30, sm: 40 }}
             href="/"
             component={Link}
           >
@@ -105,7 +105,7 @@ export default function Header() {
           {matches ? (
             <Group>
               {renderMenu(o => (pathname != o.href ? router.push(o.href) : null), {
-                fz: { base: 16, xl: 18 },
+                fz: { base: 16, lg: 18 },
               })}
             </Group>
           ) : (

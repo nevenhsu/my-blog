@@ -1,6 +1,5 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import useQuery from '@/hooks/useQuery'
 import { useAppContext } from '@/stores/AppContext'
 import { MotionSlide } from '@/components/motion'
@@ -19,11 +18,6 @@ export default function Footer({ initialData }: { initialData: Partial<FooterDat
   const { state } = useAppContext()
   const { width } = state.viewportSize
   const matches = width >= Number(px('48em'))
-
-  const pathname = usePathname()
-  const atBlog = pathname.startsWith('/blog')
-
-  if (atBlog) return null
 
   return (
     <RwdBlock

@@ -27,13 +27,12 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
       h={{
         base: `calc(100dvh - ${headerHeight.base}px)`,
         sm: `calc(100dvh - ${headerHeight.sm}px)`,
-        xl: `calc(100dvh - ${headerHeight.xl}px)`,
       }}
       px={{ base: 24, sm: 40 }}
     >
       <Stack h="100%" justify="center" align="center">
         <MotionSlide delay={2.5}>
-          <Title fw={500} fz={{ base: 24, sm: 52, xl: 64 }}>
+          <Title fw={500} fz={{ base: 24, sm: 52, lg: 64 }}>
             {data.header}
           </Title>
         </MotionSlide>
@@ -45,7 +44,7 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
 
         {/*   Subtitle  */}
         <MotionSlide delay={2.8}>
-          <Title fw={500} fz={{ base: 20, sm: 36, xl: 48 }}>
+          <Title fw={500} fz={{ base: 20, sm: 36, lg: 48 }}>
             {data.subtitle}{' '}
             <MyLink href={data.subtitleBoldHref}>
               <UnderlineMotion stroke={2}>

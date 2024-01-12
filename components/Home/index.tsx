@@ -75,7 +75,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
           <SimpleGrid
             spacing={40}
             cols={{ base: 1, sm: 2 }}
-            w={{ base: '100%', xl: 1200 }}
+            w={{ base: '100%', lg: 1200 }}
             px={{ base: 24, sm: 40 }}
             mx="auto"
           >
@@ -149,7 +149,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
 
             {/*   Gallery images  */}
             <Box
-              w={{ base: '100vw', xl: 1280 }}
+              w={{ base: '100vw', lg: 1280 }}
               px={{ base: 0, sm: 40 }}
               pb={40}
               mx="auto"
