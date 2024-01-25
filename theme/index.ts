@@ -4,7 +4,7 @@ import { createTheme } from '@mantine/core'
 import { colors } from './colors'
 
 const titleFF = 'var(--font-title)'
-const bodyFF = 'var(--font-title)'
+const bodyFF = 'var(--font-body)'
 
 export const theme = createTheme({
   focusRing: 'never',
@@ -19,28 +19,22 @@ export const theme = createTheme({
     fontWeight: '700',
     sizes: {
       h1: {
-        fontSize: 'calc(2.75rem * var(--mantine-scale))', // 44
-        lineHeight: '1.3',
+        fontSize: 'calc(3.125rem * var(--mantine-scale))', // 50
       },
       h2: {
-        fontSize: 'calc(1.75rem * var(--mantine-scale))', // 28
-        lineHeight: '1.25',
+        fontSize: 'calc(2.375rem * var(--mantine-scale))', // 38
       },
       h3: {
-        fontSize: 'calc(1.5rem * var(--mantine-scale))', // 24
-        lineHeight: '1.25',
+        fontSize: 'calc(2rem * var(--mantine-scale))', // 32
       },
       h4: {
-        fontSize: 'calc(1.25rem * var(--mantine-scale))', // 20
-        lineHeight: '1.25',
+        fontSize: 'calc(1.625rem * var(--mantine-scale))', // 26
       },
       h5: {
-        fontSize: 'calc(1.125rem * var(--mantine-scale))', // 18
-        lineHeight: '1.25',
+        fontSize: 'calc(1.375rem * var(--mantine-scale))', // 22
       },
       h6: {
-        fontSize: 'calc(1rem * var(--mantine-scale))', // 16
-        lineHeight: '1.25',
+        fontSize: 'calc(1.25rem * var(--mantine-scale))', // 20
       },
     },
   },
@@ -59,18 +53,18 @@ export const theme = createTheme({
     xl: '1.65',
   },
   radius: {
-    xs: 'calc(0.25rem * var(--mantine-scale))',
-    sm: 'calc(0.5rem * var(--mantine-scale))',
-    md: 'calc(1rem * var(--mantine-scale))',
-    lg: 'calc(1.5rem * var(--mantine-scale))',
-    xl: 'calc(2rem * var(--mantine-scale))',
+    xs: 'calc(0.25rem * var(--mantine-scale))', // 4
+    sm: 'calc(0.5rem * var(--mantine-scale))', // 8
+    md: 'calc(1rem * var(--mantine-scale))', // 16
+    lg: 'calc(1.5rem * var(--mantine-scale))', // 24
+    xl: 'calc(2rem * var(--mantine-scale))', // 32
   },
   spacing: {
-    xs: 'calc(0.5rem * var(--mantine-scale))',
-    sm: 'calc(0.75rem * var(--mantine-scale))',
-    md: 'calc(1rem * var(--mantine-scale))',
-    lg: 'calc(1.5rem * var(--mantine-scale))',
-    xl: 'calc(2rem * var(--mantine-scale))',
+    xs: 'calc(0.5rem * var(--mantine-scale))', // 8
+    sm: 'calc(0.75rem * var(--mantine-scale))', // 12
+    md: 'calc(1rem * var(--mantine-scale))', // 16
+    lg: 'calc(1.5rem * var(--mantine-scale))', // 24
+    xl: 'calc(2rem * var(--mantine-scale))', // 32
   },
   breakpoints: {
     xs: '36em', // 576

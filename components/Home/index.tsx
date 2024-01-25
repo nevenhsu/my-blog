@@ -9,7 +9,6 @@ import { px, Box, SimpleGrid } from '@mantine/core'
 import { MyTitle } from '@/components/Fonts'
 import RwdBlock from '@/components/Rwd/Block'
 import MainVisual from './MainVisual'
-import { Background, type BackgroundRef } from './Background'
 import NewsCard from './NewsCard'
 import Gallery from './Gallery'
 import { homeQuery } from '@/utils/sanity/queries'
@@ -18,7 +17,6 @@ import type { HomeData } from '@/types/home'
 
 export default function Home({ initialData }: { initialData: Partial<HomeData> }) {
   const ref = useRef(null)
-  const bgRef = useRef<BackgroundRef>(null)
   const scroll = useScroll({ target: ref })
 
   const [data] = useQuery<Partial<HomeData>>(initialData, homeQuery)
@@ -52,16 +50,10 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
           pointerEvents: 'none',
           zIndex: -1,
         }}
-      >
-        <Background ref={bgRef} data={data} />
-      </Box>
+      ></Box>
 
       {!noData ? (
-        <Box
-          onClick={() => {
-            if (bgRef.current) bgRef.current.updateColor()
-          }}
-        >
+        <Box>
           {/*   Main  */}
           <MainVisual data={data} show={show} />
 

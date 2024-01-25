@@ -1,24 +1,12 @@
 'use client'
 
-import useQuery from '@/hooks/useQuery'
-import { devQuery } from '@/utils/sanity/queries'
-import { MyPortableText } from '@/components/PortableText'
-import type { PortableTextBlock } from 'sanity'
-import Lottie from 'lottie-react'
-import animationData from '@/public/assets/coll11.json'
+import { Box } from '@mantine/core'
+import { Background } from '@/components/Home/Background'
 
 export default function Dev() {
-  const [data] = useQuery<
-    Partial<{
-      content: PortableTextBlock[]
-    }>
-  >({}, devQuery)
-
-  const { content = [] } = data
-
   return (
-    <>
-      <MyPortableText content={content} />
-    </>
+    <Box w="100vw" h="100vh">
+      <Background data={{}} />
+    </Box>
   )
 }

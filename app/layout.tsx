@@ -19,7 +19,6 @@ export const viewport: Viewport = {
 const title = 'Bess’s Website'
 const description = 'Create delightful experiences with Bess W.'
 const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
-const gTagId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER
 
 export const metadata: Metadata = {
   title,

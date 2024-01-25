@@ -2,5 +2,5 @@
   --font-default: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-title: var(--next-title), var(--font-default);
-  --font-body: var(--next-title), var(--font-default);
+  --font-body: var(--next-body), var(--font-default);
 }
