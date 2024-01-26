@@ -1,5 +1,6 @@
 body {
-  background: var(--mantine-color-body);
+  /* background: var(--mantine-color-body); */
+  background: white;
 }
 
 .c-pointer {

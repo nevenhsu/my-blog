@@ -3,6 +3,9 @@
 import { forwardRef, useImperativeHandle } from 'react'
 import { useAppContext } from '@/stores/AppContext'
 import { Box } from '@mantine/core'
+import { Canvas } from '@react-three/fiber'
+import Road from '@/threejs/models/Road'
+import { Stats, OrbitControls } from '@react-three/drei'
 import type { HomeData } from '@/types/home'
 import classes from './index.module.css'
 
@@ -22,5 +25,11 @@ export const Background = forwardRef<BackgroundRef, BackgroundProps>(function Ba
     },
   }))
 
-  return <Box className={classes.bg}></Box>
+  return (
+    <Canvas camera={{ position: [0, 10, -5], fov: 75, far: 10000 }}>
+      <Stats />
+      <OrbitControls />
+      <Road />
+    </Canvas>
+  )
 })

@@ -25,6 +25,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
+  transpilePackages: ['three'],
 }
 
 module.exports = nextConfig

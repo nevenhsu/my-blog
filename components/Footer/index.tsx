@@ -13,7 +13,7 @@ import type { FooterData } from '@/types/footer'
 
 export default function Footer({ initialData }: { initialData: Partial<FooterData> }) {
   const [data] = useQuery<Partial<FooterData>>(initialData, footerQuery)
-  const { email } = data
+  const { email } = data || {}
 
   const { state } = useAppContext()
   const { width } = state.viewportSize
