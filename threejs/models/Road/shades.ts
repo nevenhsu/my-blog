@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Uniform, Color } from 'three'
 
 export const fragmentShader = `
 uniform vec3 uColor;
@@ -6,6 +6,7 @@ void main(){
   gl_FragColor = vec4(uColor,1.);
 }
 `
+
 export const vertexShader = `
 void main() {
   vec3 transformed = position.xyz;
@@ -13,4 +14,4 @@ void main() {
 }
 `
 
-export const uniforms = { uColor: new THREE.Uniform(new THREE.Color(0x101012)) }
+export const uniforms = { uColor: new Uniform(new Color(0x404044)) }
