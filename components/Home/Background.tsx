@@ -6,6 +6,7 @@ import { Canvas } from '@react-three/fiber'
 import Road from '@/threejs/models/Road'
 import CarLight from '@/threejs/models/CarLight'
 import { Stats, Grid, CameraControls } from '@react-three/drei'
+import { options } from '@/threejs/config'
 import type { HomeData } from '@/types/home'
 import classes from './index.module.css'
 
@@ -31,7 +32,16 @@ export const Background = forwardRef<BackgroundRef, BackgroundProps>(function Ba
       <Grid />
       <axesHelper />
       <Road />
-      <CarLight />
+      {/* Left lights */}
+      <CarLight
+        meshProps={{ position: [-options.roadWidth / 2 - options.islandWidth / 2, 0, 0] }}
+        color={0xff102a}
+      />
+      {/* Right lights */}
+      <CarLight
+        meshProps={{ position: [options.roadWidth / 2 + options.islandWidth / 2, 0, 0] }}
+        color={0xfafafa}
+      />
       {/* <CameraControls /> */}
     </Canvas>
   )
