@@ -1,16 +1,21 @@
-import { useMemo } from 'react'
+import { useRef, useMemo } from 'react'
 import { TubeGeometry, LineCurve3, Vector3, InstancedBufferAttribute } from 'three'
-import { fragmentShader, vertexShader, uniforms } from './shades'
+import { Uniform, Color } from 'three'
+import { useFrame } from '@react-three/fiber'
+import { fragmentShader, vertexShader } from './shades'
 import { options } from '@/threejs/config'
 import type { MeshProps } from '@react-three/fiber'
-import type { ColorRepresentation } from 'three'
+import type { Mesh, ColorRepresentation, ShaderMaterial } from 'three'
 
 type CarLightProps = {
   meshProps: MeshProps
   color?: ColorRepresentation
+  speed?: number
 }
 
-export default function CarLight({ meshProps, color = 0xfafafa }: CarLightProps) {
+export default function CarLight({ meshProps, color = 0xfafafa, speed = 60 }: CarLightProps) {
+  const ref = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
+
   // Builds instanced data for the packing
   const objData = useMemo(() => {
     const curve = new LineCurve3(new Vector3(0, 0, 0), new Vector3(0, 0, -1))
@@ -62,14 +67,26 @@ export default function CarLight({ meshProps, color = 0xfafafa }: CarLightProps)
     }
   }, [])
 
+  useFrame(state => {
+    const t = state.clock.elapsedTime
+    if (ref.current) {
+      ref.current.material.uniforms.uTime.value = t
+    }
+  })
+
   return (
-    <mesh frustumCulled={false} {...meshProps}>
+    <mesh ref={ref} frustumCulled={false} {...meshProps}>
       <instancedBufferGeometry instanceCount={options.nPairs * 2} {...objData} />
 
       <shaderMaterial
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
-        uniforms={uniforms(color)}
+        uniforms={{
+          uColor: new Uniform(new Color(color)),
+          uTravelLength: new Uniform(options.length),
+          uTime: new Uniform(0),
+          uSpeed: new Uniform(speed),
+        }}
       />
     </mesh>
   )

@@ -1,5 +1,3 @@
-import { Uniform, Color, type ColorRepresentation } from 'three'
-
 export const fragmentShader = `
 uniform vec3 uColor;
 
@@ -12,24 +10,27 @@ void main() {
 export const vertexShader = `
 attribute vec3 aOffset;
 attribute vec2 aMetrics;
+uniform float uTime;
+uniform float uSpeed;
+uniform float uTravelLength;
 
 void main() {
   vec3 transformed = position.xyz;
   
   float radius = aMetrics.r;
-  // GLSL reserves length name
-  float len = aMetrics.g;
+  float len = aMetrics.g; // GLSL reserves length name
 
   transformed.xy *= radius; 
   transformed.z *= len;
 
+  float zOffset = uTime * uSpeed + aOffset.z;
+  zOffset = len - mod(zOffset, uTravelLength);
+
 	// Keep them separated to make the next step easier!
-	transformed.z = transformed.z + aOffset.z;
+	transformed.z = transformed.z + zOffset;
   transformed.xy += aOffset.xy;
 	
   vec4 mvPosition = modelViewMatrix * vec4(transformed,1.);
   gl_Position = projectionMatrix * mvPosition;
 }
 `
-
-export const uniforms = (color: ColorRepresentation) => ({ uColor: new Uniform(new Color(color)) })

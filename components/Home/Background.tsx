@@ -36,11 +36,13 @@ export const Background = forwardRef<BackgroundRef, BackgroundProps>(function Ba
       <CarLight
         meshProps={{ position: [-options.roadWidth / 2 - options.islandWidth / 2, 0, 0] }}
         color={0xff102a}
+        speed={60}
       />
       {/* Right lights */}
       <CarLight
         meshProps={{ position: [options.roadWidth / 2 + options.islandWidth / 2, 0, 0] }}
         color={0xfafafa}
+        speed={-60}
       />
       {/* <CameraControls /> */}
     </Canvas>
