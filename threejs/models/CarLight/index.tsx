@@ -91,12 +91,15 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       <shaderMaterial
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
-        uniforms={{
-          uColor: new Uniform(new Color(color)),
-          uTravelLength: new Uniform(options.length),
-          uTime: new Uniform(0),
-          uSpeed: new Uniform(speed),
-        }}
+        uniforms={Object.assign(
+          {
+            uColor: new Uniform(new Color(color)),
+            uTravelLength: new Uniform(options.length),
+            uTime: new Uniform(0),
+            uSpeed: new Uniform(speed),
+          },
+          options.distortion.uniforms
+        )}
       />
     </mesh>
   )

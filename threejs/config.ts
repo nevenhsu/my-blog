@@ -1,3 +1,5 @@
+import { distortion } from './distortion'
+
 export const options = {
   length: 400,
   width: 20,
@@ -5,4 +7,5 @@ export const options = {
   islandWidth: 2,
   nPairs: 50,
   roadSections: 3,
+  distortion,
 }

@@ -8,7 +8,7 @@ export default function Road() {
       <shaderMaterial
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
-        uniforms={uniforms}
+        uniforms={Object.assign(uniforms, options.distortion.uniforms)}
       />
     </mesh>
   )
