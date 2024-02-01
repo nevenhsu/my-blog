@@ -3,7 +3,7 @@
 import _ from 'lodash'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import Road from '@/threejs/models/Road'
+import Road, { type RoadRef } from '@/threejs/models/Road'
 import CarLight, { type CarLightRef } from '@/threejs/models/CarLight'
 import { Stats, Grid } from '@react-three/drei'
 import { options } from '@/threejs/config'
@@ -15,6 +15,7 @@ export type BackgroundRef = { speedUp: () => void; speedDown: () => void }
 export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ data }, ref) {
   const carLightRRef = useRef<CarLightRef>(null)
   const carLightLRef = useRef<CarLightRef>(null)
+  const roadRef = useRef<RoadRef>(null)
 
   const stateRef = useRef({
     speedUpTarget: 0,
@@ -44,6 +45,7 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
 
     carLightRRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     carLightLRef.current?.updateUniforms([{ key: 'uTime', value: time }])
+    roadRef.current?.updateUniforms([{ key: 'uTime', value: time }])
 
     // Update state
     stateRef.current = { speedUp, speedUpTarget, timeOffset }
@@ -54,7 +56,7 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
       <Stats />
       <Grid />
       <axesHelper />
-      <Road />
+      <Road ref={roadRef} />
       {/* Left lights */}
       <CarLight
         ref={carLightLRef}

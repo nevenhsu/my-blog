@@ -1,6 +1,7 @@
-import { useRef, useMemo, forwardRef, useImperativeHandle } from 'react'
+import { useRef, useMemo, forwardRef } from 'react'
 import { TubeGeometry, LineCurve3, Vector3, InstancedBufferAttribute } from 'three'
 import { Uniform, Color } from 'three'
+import { useMeshHandle, type HandleRef } from '@/threejs/hooks/useMeshHandle'
 import { fragmentShader, vertexShader } from './shades'
 import { options } from '@/threejs/config'
 import type { MeshProps } from '@react-three/fiber'
@@ -14,9 +15,7 @@ type CarLightProps = {
 
 type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
 
-export type CarLightRef = {
-  updateUniforms: (values: Array<{ key: UniformsKeys; value: any }>) => void
-}
+export type CarLightRef = HandleRef<UniformsKeys>
 
 export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
   { meshProps, color = 0xfafafa, speed = 60 },
@@ -24,15 +23,7 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
 ) {
   const meshRef = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
 
-  useImperativeHandle(ref, () => ({
-    updateUniforms(values) {
-      values.map(({ key, value }) => {
-        if (meshRef.current) {
-          meshRef.current.material.uniforms[key].value = value
-        }
-      })
-    },
-  }))
+  useMeshHandle(ref, meshRef)
 
   // Builds instanced data for the packing
   const objData = useMemo(() => {

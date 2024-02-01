@@ -1,15 +1,24 @@
-import { Uniform, Color } from 'three'
 import { options } from '@/threejs/config'
 
 export const fragmentShader = `
 uniform vec3 uColor;
+uniform float uTime;
+varying vec2 vUv; 
+
 void main(){
-  gl_FragColor = vec4(uColor,1.);
+  vec2 uv = vUv;
+  vec3 color = vec3(uColor);
+
+  uv.y = mod(uv.y + uTime * 0.1,1.);
+
+  gl_FragColor = vec4(color,1.);
 }
 `
 
 export const vertexShader = `
 uniform float uTravelLength;
+uniform float uTime;
+varying vec2 vUv; 
 
 ${options.distortion.getDistortion}
 
@@ -18,14 +27,13 @@ void main() {
 
   float progress = (transformed.y + uTravelLength / 2.) / uTravelLength;
   vec3 distortion  = getDistortion(progress);
+
   transformed.x += distortion.x;
   transformed.z += distortion.y;
+  transformed.y += -1. * distortion.z; 
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed.xyz, 1.);
+  vec4 mvPosition = modelViewMatrix * vec4(transformed,1.);
+  gl_Position = projectionMatrix * mvPosition;
+  vUv = uv;
 }
 `
-
-export const uniforms = {
-  uColor: new Uniform(new Color(0x404044)),
-  uTravelLength: new Uniform(options.length),
-}
