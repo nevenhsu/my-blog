@@ -1,7 +1,6 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, forwardRef, useImperativeHandle } from 'react'
 import { TubeGeometry, LineCurve3, Vector3, InstancedBufferAttribute } from 'three'
 import { Uniform, Color } from 'three'
-import { useFrame } from '@react-three/fiber'
 import { fragmentShader, vertexShader } from './shades'
 import { options } from '@/threejs/config'
 import type { MeshProps } from '@react-three/fiber'
@@ -13,8 +12,27 @@ type CarLightProps = {
   speed?: number
 }
 
-export default function CarLight({ meshProps, color = 0xfafafa, speed = 60 }: CarLightProps) {
-  const ref = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
+type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
+
+export type CarLightRef = {
+  updateUniforms: (values: Array<{ key: UniformsKeys; value: any }>) => void
+}
+
+export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
+  { meshProps, color = 0xfafafa, speed = 60 },
+  ref
+) {
+  const meshRef = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
+
+  useImperativeHandle(ref, () => ({
+    updateUniforms(values) {
+      values.map(({ key, value }) => {
+        if (meshRef.current) {
+          meshRef.current.material.uniforms[key].value = value
+        }
+      })
+    },
+  }))
 
   // Builds instanced data for the packing
   const objData = useMemo(() => {
@@ -39,7 +57,6 @@ export default function CarLight({ meshProps, color = 0xfafafa, speed = 60 }: Ca
       const offsetX = 0.5 * Math.random()
 
       const offsetY = radius * 1.3
-
       const offsetZ = Math.random() * options.length
 
       aOffset.push(sectionX - carWidth / 2 + offsetX)
@@ -67,15 +84,8 @@ export default function CarLight({ meshProps, color = 0xfafafa, speed = 60 }: Ca
     }
   }, [])
 
-  useFrame(state => {
-    const t = state.clock.elapsedTime
-    if (ref.current) {
-      ref.current.material.uniforms.uTime.value = t
-    }
-  })
-
   return (
-    <mesh ref={ref} frustumCulled={false} {...meshProps}>
+    <mesh ref={meshRef} frustumCulled={false} {...meshProps}>
       <instancedBufferGeometry instanceCount={options.nPairs * 2} {...objData} />
 
       <shaderMaterial
@@ -90,4 +100,4 @@ export default function CarLight({ meshProps, color = 0xfafafa, speed = 60 }: Ca
       />
     </mesh>
   )
-}
+})
