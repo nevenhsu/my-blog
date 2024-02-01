@@ -1,5 +1,6 @@
 'use client'
 
+import _ from 'lodash'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import Road from '@/threejs/models/Road'
@@ -23,7 +24,7 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
 
   useImperativeHandle(ref, () => ({
     speedUp() {
-      stateRef.current.speedUpTarget = 0.1
+      stateRef.current.speedUpTarget = 4
       return
     },
     speedDown() {
@@ -32,20 +33,20 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
     },
   }))
 
-  useFrame(state => {
-    stateRef.current.speedUp += lerp(
-      stateRef.current.speedUp,
-      stateRef.current.speedUpTarget,
-      // 10% each frame
-      0.1,
-      0.00001
-    )
+  useFrame((state, delta) => {
+    let { speedUp, speedUpTarget, timeOffset } = stateRef.current
+    const coefficient = -60 * Math.log2(1 - 0.1)
+    const lerpT = Math.exp(-coefficient * delta)
 
-    stateRef.current.timeOffset += stateRef.current.speedUp
-    const time = state.clock.elapsedTime + stateRef.current.timeOffset
+    speedUp += lerp(speedUp, speedUpTarget, lerpT, 0.00001)
+    timeOffset += speedUp * delta
+    const time = state.clock.elapsedTime + timeOffset
 
     carLightRRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     carLightLRef.current?.updateUniforms([{ key: 'uTime', value: time }])
+
+    // Update state
+    stateRef.current = { speedUp, speedUpTarget, timeOffset }
   })
 
   return (
