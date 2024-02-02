@@ -33,4 +33,5 @@ vec3 getDistortion(float progress) {
 export const distortion = {
   uniforms,
   getDistortion: vertex,
+  getJS: undefined,
 }

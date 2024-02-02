@@ -1,12 +1,14 @@
 'use client'
 
 import _ from 'lodash'
+import { Vector3 } from 'three'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import Road, { type RoadRef } from '@/threejs/models/Road'
 import CarLight, { type CarLightRef } from '@/threejs/models/CarLight'
-import { Stats, Grid } from '@react-three/drei'
+import { Stats } from '@react-three/drei'
 import { options } from '@/threejs/config'
+import { isPerspectiveCamera } from '@/threejs/utils/helpers'
 import type { HomeData } from '@/types/home'
 
 type BackgroundProps = { data: Partial<HomeData> }
@@ -17,25 +19,31 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
   const carLightLRef = useRef<CarLightRef>(null)
   const roadRef = useRef<RoadRef>(null)
 
+  const { camera } = useThree()
+
   const stateRef = useRef({
     speedUpTarget: 0,
     speedUp: 0,
     timeOffset: 0,
+    fovTarget: options.fov,
+    fov: options.fov,
   })
 
   useImperativeHandle(ref, () => ({
     speedUp() {
-      stateRef.current.speedUpTarget = 4
+      stateRef.current.speedUpTarget = options.speedUp
+      stateRef.current.fovTarget = options.fovSpeedUp
       return
     },
     speedDown() {
       stateRef.current.speedUpTarget = 0
+      stateRef.current.fovTarget = options.fov
       return
     },
   }))
 
   useFrame((state, delta) => {
-    let { speedUp, speedUpTarget, timeOffset } = stateRef.current
+    let { speedUp, speedUpTarget, timeOffset, fovTarget } = stateRef.current
     const coefficient = -60 * Math.log2(1 - 0.1)
     const lerpT = Math.exp(-coefficient * delta)
 
@@ -47,15 +55,39 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
     carLightLRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     roadRef.current?.updateUniforms([{ key: 'uTime', value: time }])
 
+    let updateCamera = false
+    if (isPerspectiveCamera(camera)) {
+      const fovChange = lerp(camera.fov, fovTarget, lerpT)
+      if (fovChange) {
+        camera.fov += fovChange * delta * 6
+        updateCamera = true
+      }
+    }
+
+    if (options.distortion.getJS) {
+      const distortion = options.distortion.getJS(0.025, time)
+
+      camera.lookAt(
+        new Vector3(
+          camera.position.x + distortion.x,
+          camera.position.y + distortion.y,
+          camera.position.z + distortion.z
+        )
+      )
+      updateCamera = true
+    }
+
+    if (updateCamera) {
+      camera.updateProjectionMatrix()
+    }
+
     // Update state
-    stateRef.current = { speedUp, speedUpTarget, timeOffset }
+    stateRef.current = { ...stateRef.current, speedUp, speedUpTarget, timeOffset }
   })
 
   return (
     <>
       <Stats />
-      <Grid />
-      <axesHelper />
       <Road ref={roadRef} />
       {/* Left lights */}
       <CarLight
