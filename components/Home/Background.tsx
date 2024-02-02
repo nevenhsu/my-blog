@@ -6,6 +6,7 @@ import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import Road, { type RoadRef } from '@/threejs/models/Road'
 import CarLight, { type CarLightRef } from '@/threejs/models/CarLight'
+import LightsSticks, { type LightsSticksRef } from '@/threejs/models/LightsSticks'
 import { Stats } from '@react-three/drei'
 import { options } from '@/threejs/config'
 import { isPerspectiveCamera } from '@/threejs/utils/helpers'
@@ -18,6 +19,7 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
   const carLightRRef = useRef<CarLightRef>(null)
   const carLightLRef = useRef<CarLightRef>(null)
   const roadRef = useRef<RoadRef>(null)
+  const sticksRef = useRef<LightsSticksRef>(null)
 
   const { camera } = useThree()
 
@@ -54,6 +56,7 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
     carLightRRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     carLightLRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     roadRef.current?.updateUniforms([{ key: 'uTime', value: time }])
+    sticksRef.current?.updateUniforms([{ key: 'uTime', value: time }])
 
     let updateCamera = false
     if (isPerspectiveCamera(camera)) {
@@ -89,6 +92,11 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
     <>
       <Stats />
       <Road ref={roadRef} />
+      {/* light Sticks */}
+      <LightsSticks
+        ref={sticksRef}
+        meshProps={{ position: [-(options.roadWidth + options.islandWidth / 2), 0, 0] }}
+      />
       {/* Left lights */}
       <CarLight
         ref={carLightLRef}

@@ -52,7 +52,7 @@ export const options = {
     /***  Only these colors can be an array ***/
     leftCars: [0x7d0d1b, 0xa90519, 0xff102a],
     rightCars: [0xf1eece, 0xe6e2b1, 0xdfd98a],
-    sticks: 0xf1eece,
+    sticks: [0xf1eece],
   },
 
   distortion: getDistortion('xyDistortion'),
