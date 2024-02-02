@@ -1,7 +1,7 @@
 'use client'
 
 import _ from 'lodash'
-import { Vector3 } from 'three'
+import { Vector2, Vector3 } from 'three'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import Road, { type RoadRef } from '@/threejs/models/Road'
@@ -18,7 +18,9 @@ export type BackgroundRef = { speedUp: () => void; speedDown: () => void }
 export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ data }, ref) {
   const carLightRRef = useRef<CarLightRef>(null)
   const carLightLRef = useRef<CarLightRef>(null)
-  const roadRef = useRef<RoadRef>(null)
+  const roadRRef = useRef<RoadRef>(null)
+  const roadLRef = useRef<RoadRef>(null)
+  const islandRef = useRef<RoadRef>(null)
   const sticksRef = useRef<LightsSticksRef>(null)
 
   const { camera } = useThree()
@@ -55,7 +57,9 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
 
     carLightRRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     carLightLRef.current?.updateUniforms([{ key: 'uTime', value: time }])
-    roadRef.current?.updateUniforms([{ key: 'uTime', value: time }])
+    islandRef.current?.updateUniforms([{ key: 'uTime', value: time }])
+    roadRRef.current?.updateUniforms([{ key: 'uTime', value: time }])
+    roadLRef.current?.updateUniforms([{ key: 'uTime', value: time }])
     sticksRef.current?.updateUniforms([{ key: 'uTime', value: time }])
 
     let updateCamera = false
@@ -91,7 +95,13 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
   return (
     <>
       <Stats />
-      <Road ref={roadRef} />
+      {/* Right Road */}
+      <Road ref={roadRRef} side={1} isRoad />
+      {/* Left Road */}
+      <Road ref={roadLRef} side={-1} isRoad />
+      {/* Island */}
+      <Road ref={islandRef} side={0} isRoad={false} />
+
       {/* light Sticks */}
       <LightsSticks
         ref={sticksRef}
@@ -101,15 +111,15 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
       <CarLight
         ref={carLightLRef}
         meshProps={{ position: [-options.roadWidth / 2 - options.islandWidth / 2, 0, 0] }}
-        color={0xff102a}
-        speed={60}
+        fade={new Vector2(0, 1 - options.carLightsFade)}
+        color={options.colors.leftCars}
       />
       {/* Right lights */}
       <CarLight
         ref={carLightRRef}
         meshProps={{ position: [options.roadWidth / 2 + options.islandWidth / 2, 0, 0] }}
-        color={0xfafafa}
-        speed={-60}
+        fade={new Vector2(1, 0 + options.carLightsFade)}
+        color={options.colors.rightCars}
       />
     </>
   )

@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { useRef, useMemo, forwardRef } from 'react'
 import { TubeGeometry, LineCurve3, Vector3, InstancedBufferAttribute } from 'three'
 import { Uniform, Color } from 'three'
@@ -5,12 +6,12 @@ import { useMeshHandle, type HandleRef } from '@/threejs/hooks/useMeshHandle'
 import { fragmentShader, vertexShader } from './shades'
 import { options } from '@/threejs/config'
 import type { MeshProps } from '@react-three/fiber'
-import type { Mesh, ColorRepresentation, ShaderMaterial } from 'three'
+import type { Mesh, Vector2, ShaderMaterial } from 'three'
 
 type CarLightProps = {
   meshProps: MeshProps
-  color?: ColorRepresentation
-  speed?: number
+  fade: Vector2
+  color: Array<string | number>
 }
 
 type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
@@ -18,7 +19,7 @@ type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
 export type CarLightRef = HandleRef<UniformsKeys>
 
 export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
-  { meshProps, color = 0xfafafa, speed = 60 },
+  { meshProps, fade, color },
   ref
 ) {
   const meshRef = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
@@ -28,48 +29,65 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
   // Builds instanced data for the packing
   const objData = useMemo(() => {
     const curve = new LineCurve3(new Vector3(0, 0, 0), new Vector3(0, 0, -1))
-    const tube = new TubeGeometry(curve, 25, 1, 8, false)
+    const tube = new TubeGeometry(curve, 40, 1, 8, false)
 
     const aOffset = []
     const aMetrics = []
+    const aColor = []
 
-    const sectionWidth = options.roadWidth / options.roadSections
+    const laneWidth = options.roadWidth / options.lanesPerRoad
+    const colors = color.map(c => new Color(c))
 
     for (let i = 0; i < options.nPairs; i++) {
-      const radius = Math.random() * 0.1 + 0.1
-      const length = Math.random() * options.length * 0.08 + options.length * 0.02
+      const radius = _.random(options.carLightsRadius[0], options.carLightsRadius[1])
+      const length = _.random(options.carLightsLength[0], options.carLightsLength[1])
+      const speed = _.random(options.carLightsSpeed[0], options.carLightsSpeed[1])
       // 1a. Get it's lane index
       // Instead of random, keep lights per lane consistent
-      const section = i % 3
+      const carLane = i % 3
+      let offsetX = carLane * laneWidth - options.roadWidth / 2 + laneWidth / 2
+      const carWidth =
+        _.random(options.carWidthPercentage[0], options.carWidthPercentage[1]) * laneWidth
+      const carShiftX = _.random(options.carShiftX[0], options.carShiftX[1]) * laneWidth // Drunk Driving
+      offsetX += carShiftX // Both lights share same shiftX and lane
 
-      // 1b. Get its lane's centered position
-      const sectionX = section * sectionWidth - options.roadWidth / 2 + sectionWidth / 2
-      const carWidth = 0.5 * sectionWidth
-      const offsetX = 0.5 * Math.random()
+      const offsetY =
+        _.random(options.carFloorSeparation[0], options.carFloorSeparation[1]) + radius * 1.3
 
-      const offsetY = radius * 1.3
-      const offsetZ = Math.random() * options.length
+      const offsetZ = -_.random(options.length)
 
-      aOffset.push(sectionX - carWidth / 2 + offsetX)
+      aOffset.push(offsetX - carWidth / 2)
       aOffset.push(offsetY)
-      aOffset.push(-offsetZ)
+      aOffset.push(offsetZ)
 
-      aOffset.push(sectionX + carWidth / 2 + offsetX)
+      aOffset.push(offsetX + carWidth / 2)
       aOffset.push(offsetY)
-      aOffset.push(-offsetZ)
+      aOffset.push(offsetZ)
 
       aMetrics.push(radius)
       aMetrics.push(length)
+      aMetrics.push(speed)
 
       aMetrics.push(radius)
       aMetrics.push(length)
+      aMetrics.push(speed)
+
+      const color = _.sample(colors) || colors[0]
+      aColor.push(color.r)
+      aColor.push(color.g)
+      aColor.push(color.b)
+
+      aColor.push(color.r)
+      aColor.push(color.g)
+      aColor.push(color.b)
     }
 
     return {
       index: tube.index,
       attributes: {
         aOffset: new InstancedBufferAttribute(new Float32Array(aOffset), 3, false),
-        aMetrics: new InstancedBufferAttribute(new Float32Array(aMetrics), 2, false),
+        aMetrics: new InstancedBufferAttribute(new Float32Array(aMetrics), 3, false),
+        aColor: new InstancedBufferAttribute(new Float32Array(aColor), 3, false),
         ...tube.attributes,
       },
     }
@@ -77,17 +95,16 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
 
   return (
     <mesh ref={meshRef} frustumCulled={false} {...meshProps}>
-      <instancedBufferGeometry instanceCount={options.nPairs * 2} {...objData} />
+      <instancedBufferGeometry instanceCount={options.lightPairsPerRoadWay * 2} {...objData} />
 
       <shaderMaterial
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
         uniforms={Object.assign(
           {
-            uColor: new Uniform(new Color(color)),
             uTravelLength: new Uniform(options.length),
             uTime: new Uniform(0),
-            uSpeed: new Uniform(speed),
+            uFade: new Uniform(fade),
           },
           options.distortion.uniforms
         )}
