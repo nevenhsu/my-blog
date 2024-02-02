@@ -12,6 +12,7 @@ type CarLightProps = {
   meshProps: MeshProps
   fade: Vector2
   color: Array<string | number>
+  side: number // 1: right, -1: left
 }
 
 type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
@@ -19,7 +20,7 @@ type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
 export type CarLightRef = HandleRef<UniformsKeys>
 
 export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
-  { meshProps, fade, color },
+  { meshProps, fade, color, side },
   ref
 ) {
   const meshRef = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
@@ -37,11 +38,12 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
 
     const laneWidth = options.roadWidth / options.lanesPerRoad
     const colors = color.map(c => new Color(c))
+    const movingSpeed = side > 0 ? options.movingCloserSpeed : options.movingAwaySpeed
 
     for (let i = 0; i < options.nPairs; i++) {
       const radius = _.random(options.carLightsRadius[0], options.carLightsRadius[1])
       const length = _.random(options.carLightsLength[0], options.carLightsLength[1])
-      const speed = _.random(options.carLightsSpeed[0], options.carLightsSpeed[1])
+      const speed = _.random(movingSpeed[0], movingSpeed[1])
       // 1a. Get it's lane index
       // Instead of random, keep lights per lane consistent
       const carLane = i % 3
@@ -51,8 +53,7 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       const carShiftX = _.random(options.carShiftX[0], options.carShiftX[1]) * laneWidth // Drunk Driving
       offsetX += carShiftX // Both lights share same shiftX and lane
 
-      const offsetY =
-        _.random(options.carFloorSeparation[0], options.carFloorSeparation[1]) + radius * 1.3
+      const offsetY = _.random(options.carFloorSeparation[0], options.carFloorSeparation[1])
 
       const offsetZ = -_.random(options.length)
 

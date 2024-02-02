@@ -20,6 +20,7 @@
     "@portabletext/react": "^3.0.11",
     "@react-three/drei": "^9.96.5",
     "@react-three/fiber": "^8.15.15",
+    "@react-three/postprocessing": "^2.15.13",
     "@reduxjs/toolkit": "^2.1.0",
     "@sanity/client": "^6.11.2",
     "@sanity/code-input": "^4.1.2",

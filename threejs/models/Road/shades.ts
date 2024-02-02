@@ -36,8 +36,8 @@ float shoulderLinesWidth = 1. / uLanes * uShoulderLinesWidthPercentage;
 float shoulderLines = step(1. - shoulderLinesWidth, uv.x) + step(uv.x, shoulderLinesWidth);
 color = mix(color, uBrokenLinesColor, shoulderLines);
 
-vec2 noiseFreq = vec2(4., 7000.);
-float roadNoise = random(floor(uv * noiseFreq) / noiseFreq) * 0.02 - 0.01; 
+vec2 noiseFreq = vec2(4., 8000.);
+float roadNoise = random(floor(uv * noiseFreq) / noiseFreq) * 0.012 - 0.01; 
 color += roadNoise;
 `
 

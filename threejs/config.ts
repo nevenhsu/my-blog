@@ -14,7 +14,7 @@ export const options = {
   fov: 90,
   fovSpeedUp: 150,
   speedUp: 3,
-  carLightsFade: 0.4,
+  carLightsFade: 0.5,
 
   // Percentage of the lane's width
   shoulderLinesWidthPercentage: 0.05,
@@ -39,17 +39,15 @@ export const options = {
   // Or cars start going into other lanes
   carShiftX: [-0.5, 0.5],
   carLightsLength: [400 * 0.05, 400 * 0.2], // Length of the lights. Best to be less than total length
-  carLightsRadius: [0.03, 0.08], // Radius of the tubes
-  carLightsSpeed: [10, 60],
+  carLightsRadius: [0.03, 0.1], // Radius of the tubes
   carWidthPercentage: [0.1, 0.5], // Width is percentage of a lane. Numbers from 0 to 1
-  carFloorSeparation: [0, 0.1], // Self Explanatory
+  carFloorSeparation: [0, 0.2], // Self Explanatory
 
   colors: {
-    roadColor: 0x303033,
-    islandColor: 0x404044,
-    background: 0x000000,
-    shoulderLines: 0x535358,
-    brokenLines: 0x505055,
+    roadColor: 0x080808,
+    islandColor: 0x0a0a0a,
+    shoulderLines: 0x131318,
+    brokenLines: 0x131318,
     /***  Only these colors can be an array ***/
     leftCars: [0x7d0d1b, 0xa90519, 0xff102a],
     rightCars: [0xf1eece, 0xe6e2b1, 0xdfd98a],

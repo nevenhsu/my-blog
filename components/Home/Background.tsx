@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { Vector2, Vector3 } from 'three'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
+import { EffectComposer, Bloom, SMAA } from '@react-three/postprocessing'
 import Road, { type RoadRef } from '@/threejs/models/Road'
 import CarLight, { type CarLightRef } from '@/threejs/models/CarLight'
 import LightsSticks, { type LightsSticksRef } from '@/threejs/models/LightsSticks'
@@ -113,14 +114,20 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
         meshProps={{ position: [-options.roadWidth / 2 - options.islandWidth / 2, 0, 0] }}
         fade={new Vector2(0, 1 - options.carLightsFade)}
         color={options.colors.leftCars}
+        side={-1}
       />
       {/* Right lights */}
       <CarLight
         ref={carLightRRef}
         meshProps={{ position: [options.roadWidth / 2 + options.islandWidth / 2, 0, 0] }}
-        fade={new Vector2(1, 0 + options.carLightsFade)}
+        fade={new Vector2(1, options.carLightsFade)}
         color={options.colors.rightCars}
+        side={1}
       />
+
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.2} />
+      </EffectComposer>
     </>
   )
 })
