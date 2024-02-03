@@ -61,6 +61,14 @@ export default forwardRef<LightsSticksRef, LightsSticksProps>(function CarLight(
     }
   }, [])
 
+  const uniforms = useMemo(() => {
+    return {
+      uTravelLength: new Uniform(options.length),
+      uTime: new Uniform(0),
+      ...options.distortion.uniforms,
+    }
+  }, [])
+
   return (
     <mesh ref={meshRef} frustumCulled={false} {...meshProps}>
       <instancedBufferGeometry instanceCount={options.totalSideLightSticks} {...objData} />
@@ -69,13 +77,7 @@ export default forwardRef<LightsSticksRef, LightsSticksProps>(function CarLight(
         side={2}
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
-        uniforms={Object.assign(
-          {
-            uTravelLength: new Uniform(options.length),
-            uTime: new Uniform(0),
-          },
-          options.distortion.uniforms
-        )}
+        uniforms={uniforms}
       />
     </mesh>
   )

@@ -1,22 +1,18 @@
 'use client'
 
-import _ from 'lodash'
 import { Vector2, Vector3 } from 'three'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
-import { EffectComposer, Bloom, SMAA } from '@react-three/postprocessing'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import Road, { type RoadRef } from '@/threejs/models/Road'
 import CarLight, { type CarLightRef } from '@/threejs/models/CarLight'
 import LightsSticks, { type LightsSticksRef } from '@/threejs/models/LightsSticks'
-import { Stats } from '@react-three/drei'
+import { isPerspectiveCamera, lerp } from '@/threejs/utils/helpers'
 import { options } from '@/threejs/config'
-import { isPerspectiveCamera } from '@/threejs/utils/helpers'
-import type { HomeData } from '@/types/home'
 
-type BackgroundProps = { data: Partial<HomeData> }
-export type BackgroundRef = { speedUp: () => void; speedDown: () => void }
+export type MyCanvasRef = { speedUp: () => void; speedDown: () => void }
 
-export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ data }, ref) {
+const Scene = forwardRef<MyCanvasRef, {}>(function Scene(props, ref) {
   const carLightRRef = useRef<CarLightRef>(null)
   const carLightLRef = useRef<CarLightRef>(null)
   const roadRRef = useRef<RoadRef>(null)
@@ -90,12 +86,11 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
     }
 
     // Update state
-    stateRef.current = { ...stateRef.current, speedUp, speedUpTarget, timeOffset }
+    stateRef.current = { ...stateRef.current, speedUp, timeOffset }
   })
 
   return (
     <>
-      <Stats />
       {/* Right Road */}
       <Road ref={roadRRef} side={1} isRoad />
       {/* Left Road */}
@@ -132,10 +127,10 @@ export default forwardRef<BackgroundRef, BackgroundProps>(function Background({ 
   )
 })
 
-function lerp(current: number, target: number, speed = 0.1, limit = 0.001) {
-  let change = (target - current) * speed
-  if (Math.abs(change) < limit) {
-    change = target - current
-  }
-  return change
-}
+export default forwardRef<MyCanvasRef, {}>(function MyCanvas(props, ref) {
+  return (
+    <Canvas camera={{ position: [0, 8, -4], rotation: [0, 0, 0], fov: options.fov }}>
+      <Scene ref={ref} />
+    </Canvas>
+  )
+})

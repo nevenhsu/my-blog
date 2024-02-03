@@ -44,14 +44,14 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       const radius = _.random(options.carLightsRadius[0], options.carLightsRadius[1])
       const length = _.random(options.carLightsLength[0], options.carLightsLength[1])
       const speed = _.random(movingSpeed[0], movingSpeed[1])
-      // 1a. Get it's lane index
-      // Instead of random, keep lights per lane consistent
+
+      // Get lane index
       const carLane = i % 3
-      let offsetX = carLane * laneWidth - options.roadWidth / 2 + laneWidth / 2
+
       const carWidth =
         _.random(options.carWidthPercentage[0], options.carWidthPercentage[1]) * laneWidth
       const carShiftX = _.random(options.carShiftX[0], options.carShiftX[1]) * laneWidth // Drunk Driving
-      offsetX += carShiftX // Both lights share same shiftX and lane
+      const offsetX = carLane * laneWidth - options.roadWidth / 2 + laneWidth / 2 + carShiftX
 
       const offsetY = _.random(options.carFloorSeparation[0], options.carFloorSeparation[1])
 
@@ -94,6 +94,15 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
     }
   }, [])
 
+  const uniforms = useMemo(() => {
+    return {
+      uTravelLength: new Uniform(options.length),
+      uTime: new Uniform(0),
+      uFade: new Uniform(fade),
+      ...options.distortion.uniforms,
+    }
+  }, [])
+
   return (
     <mesh ref={meshRef} frustumCulled={false} {...meshProps}>
       <instancedBufferGeometry instanceCount={options.lightPairsPerRoadWay * 2} {...objData} />
@@ -101,14 +110,7 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       <shaderMaterial
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
-        uniforms={Object.assign(
-          {
-            uTravelLength: new Uniform(options.length),
-            uTime: new Uniform(0),
-            uFade: new Uniform(fade),
-          },
-          options.distortion.uniforms
-        )}
+        uniforms={uniforms}
       />
     </mesh>
   )

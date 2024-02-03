@@ -20,30 +20,29 @@ export default forwardRef<HandleRef<UniformsKeys>, RoadProps>(function Road({ si
   useMeshHandle(ref, meshRef)
 
   const uniforms = useMemo(() => {
-    let values = Object.assign(
-      {
-        uColor: new Uniform(
-          new Color(isRoad ? options.colors.roadColor : options.colors.islandColor)
-        ),
-        uTravelLength: new Uniform(options.length),
-        uTime: new Uniform(0),
-      },
-      options.distortion.uniforms
-    )
+    let values: { [k: string]: any } = {
+      uColor: new Uniform(
+        new Color(isRoad ? options.colors.roadColor : options.colors.islandColor)
+      ),
+      uTravelLength: new Uniform(options.length),
+      uTime: new Uniform(0),
+      ...options.distortion.uniforms,
+    }
 
     if (isRoad) {
-      values = Object.assign(values, {
+      values = {
+        ...values,
         uLanes: new Uniform(options.lanesPerRoad),
         uShoulderLinesColor: new Uniform(new Color(options.colors.shoulderLines)),
         uShoulderLinesWidthPercentage: new Uniform(options.shoulderLinesWidthPercentage),
         uBrokenLinesColor: new Uniform(new Color(options.colors.brokenLines)),
         uBrokenLinesLengthPercentage: new Uniform(options.brokenLinesLengthPercentage),
         uBrokenLinesWidthPercentage: new Uniform(options.brokenLinesWidthPercentage),
-      })
+      }
     }
 
     return values
-  }, [isRoad])
+  }, [])
 
   return (
     <mesh

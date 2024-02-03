@@ -12,7 +12,7 @@ export type HandleRef<T> = {
 export function useMeshHandle<T extends string>(ref: ForwardedRef<HandleRef<T>>, meshRef: MeshRef) {
   useImperativeHandle(ref, () => ({
     updateUniforms(values) {
-      values.map(({ key, value }) => {
+      values.forEach(({ key, value }) => {
         if (meshRef.current) {
           meshRef.current.material.uniforms[key].value = value
         }
