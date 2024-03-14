@@ -1,4 +1,4 @@
-import { defineField, defineType, defineArrayMember } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'home',
@@ -6,10 +6,7 @@ export default defineType({
   type: 'document',
   fieldsets: [
     { name: 'title', title: 'Title', options: { collapsible: false, columns: 1 } },
-    { name: 'subtitle', title: 'Subtitle (Bold)', options: { collapsible: false, columns: 2 } },
-    { name: 'caption', title: 'Caption (Bold)', options: { collapsible: false, columns: 2 } },
-    { name: 'news', title: 'News (Cases)', options: { collapsible: false, columns: 2 } },
-    { name: 'background', title: 'Background', options: { collapsible: false, columns: 1 } },
+    { name: 'news', title: 'News', options: { collapsible: false, columns: 2 } },
   ],
   fields: [
     defineField({
@@ -37,16 +34,9 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'subtitleBold',
-      title: 'Text',
-      type: 'string',
-      fieldset: 'subtitle',
-    }),
-    defineField({
-      name: 'subtitleBoldHref',
-      title: 'Link',
-      type: 'string',
-      fieldset: 'subtitle',
+      name: 'subtitleHref',
+      title: 'Subtitle Href',
+      type: 'href',
     }),
     defineField({
       name: 'caption1',
@@ -59,16 +49,9 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'captionBold',
-      title: 'Text',
-      type: 'string',
-      fieldset: 'caption',
-    }),
-    defineField({
-      name: 'captionBoldHref',
-      title: 'Link',
-      type: 'string',
-      fieldset: 'caption',
+      name: 'captionHref',
+      title: 'Caption Href',
+      type: 'href',
     }),
     defineField({
       name: 'newsTitle',
@@ -99,24 +82,14 @@ export default defineType({
       name: 'gallery',
     }),
     defineField({
-      name: 'bgFlash',
-      title: 'Flash Color',
-      type: 'color',
-      fieldset: 'background',
+      title: 'Lights',
+      type: 'lights',
+      name: 'lights',
     }),
     defineField({
-      name: 'bgColors',
-      title: 'Primary Colors',
-      type: 'array',
-      of: [{ type: 'color' }],
-      fieldset: 'background',
-    }),
-    defineField({
-      name: 'bgColorsSecondary',
-      title: 'Secondary Colors',
-      type: 'array',
-      of: [{ type: 'color' }],
-      fieldset: 'background',
+      title: 'Pattern',
+      type: 'pattern',
+      name: 'pattern',
     }),
   ],
   preview: {

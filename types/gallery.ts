@@ -1,7 +1,5 @@
 import type { ImageAssetData } from './image'
-import type { RectData } from './rect'
 import type { SanityArray } from '@/types/common'
-import type { LottieData } from '@/types/lottie'
 
 export type GalleryData = {
   dimensions: {
@@ -9,17 +7,9 @@ export type GalleryData = {
     height: number
     aspectRatio: number
   }
+  title: string
   asset: ImageAssetData
-  lottie?: LottieData
-  rwd?: {
-    base?: RectData
-    xs?: RectData
-    sm?: RectData
-    md?: RectData
-    lg?: RectData
-    xl?: RectData
-  }
-  hidden?: boolean
+  depth: ImageAssetData
 }
 
 export type GalleryDataArray = SanityArray<GalleryData>

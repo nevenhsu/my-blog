@@ -1,8 +1,8 @@
 import { useRef, useMemo, forwardRef } from 'react'
 import { Uniform, Color } from 'three'
-import { useMeshHandle, type HandleRef } from '@/threejs/hooks/useMeshHandle'
+import { useMeshHandle, type HandleRef } from '@/components/threejs/hooks/useMeshHandle'
 import { roadFragment, islandFragment, vertexShader } from './shades'
-import { options } from '@/threejs/config'
+import { options } from '@/components/threejs/config'
 import type { Mesh, PlaneGeometry, ShaderMaterial } from 'three'
 
 type UniformsKeys = 'uTime'

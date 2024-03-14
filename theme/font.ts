@@ -1,16 +1,14 @@
-import { Source_Sans_3, STIX_Two_Text } from 'next/font/google'
+import { Poppins, Nunito } from 'next/font/google'
 
-const title = Source_Sans_3({
-  weight: ['400', '500', '700'],
+const title = Poppins({
+  weight: ['200', '400', '700', '900'],
   subsets: ['latin'],
-  display: 'swap',
   variable: '--next-title',
 })
 
-const body = STIX_Two_Text({
-  weight: ['400', '700'],
+const body = Nunito({
+  weight: ['200', '400'],
   subsets: ['latin'],
-  display: 'swap',
   variable: '--next-body',
 })
 

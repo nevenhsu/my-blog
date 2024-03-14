@@ -4,11 +4,11 @@ import { Vector2, Vector3 } from 'three'
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import Road, { type RoadRef } from '@/threejs/models/Road'
-import CarLight, { type CarLightRef } from '@/threejs/models/CarLight'
-import LightsSticks, { type LightsSticksRef } from '@/threejs/models/LightsSticks'
-import { isPerspectiveCamera, lerp } from '@/threejs/utils/helpers'
-import { options } from '@/threejs/config'
+import Road, { type RoadRef } from '@/components/threejs/models/Road'
+import CarLight, { type CarLightRef } from '@/components/threejs/models/CarLight'
+import LightsSticks, { type LightsSticksRef } from '@/components/threejs/models/LightsSticks'
+import { isPerspectiveCamera, lerp } from '@/components/threejs/utils/helpers'
+import { options } from '@/components/threejs/config'
 
 export type MyCanvasRef = { speedUp: () => void; speedDown: () => void }
 

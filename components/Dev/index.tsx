@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { Box } from '@mantine/core'
 
-import MyCanvas, { type MyCanvasRef } from '@/threejs/MyCanvas'
+import MyCanvas, { type MyCanvasRef } from '@/components/threejs/MyCanvas'
 
 export default function Dev() {
   const canvasRef = useRef<MyCanvasRef>(null)

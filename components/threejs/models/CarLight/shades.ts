@@ -1,4 +1,4 @@
-import { options } from '@/threejs/config'
+import { options } from '@/components/threejs/config'
 
 export const fragmentShader = `
 varying vec3 vColor;

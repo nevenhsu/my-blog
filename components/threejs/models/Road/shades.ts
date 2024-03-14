@@ -1,4 +1,4 @@
-import { options } from '@/threejs/config'
+import { options } from '@/components/threejs/config'
 
 const roadMarkVars = `
 uniform float uLanes;

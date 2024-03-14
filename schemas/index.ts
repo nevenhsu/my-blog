@@ -6,6 +6,9 @@ import lottie from './lottie'
 import iframe from './iframe'
 import rwd from './rwd'
 import gallery from './gallery'
+import lights from './lights'
+import pattern from './pattern'
+import href from './href'
 import socialMedia from './socialMedia'
 import news from './news'
 import blockContent from './blockContent'
@@ -23,7 +26,6 @@ import titleCard from './titleCard'
 import contentCard from './contentCard'
 import textCard from './textCard'
 import mCode from './mCode'
-
 import dev from './dev'
 
 export const schemaTypes = [
@@ -33,6 +35,9 @@ export const schemaTypes = [
   lottie,
   iframe,
   gallery,
+  lights,
+  pattern,
+  href,
   socialMedia,
   news,
   post,

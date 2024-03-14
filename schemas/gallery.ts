@@ -1,12 +1,10 @@
 import { defineField, defineType } from 'sanity'
-import { getRwdField } from '@/utils/sanity/getRwdField'
 
 export default defineType({
   name: 'gallery',
   title: 'Gallery',
   type: 'object',
   fields: [
-    defineField({ name: 'cols', title: 'Columns', type: 'number' }),
     defineField({
       name: 'images',
       title: 'Images',
@@ -19,24 +17,12 @@ export default defineType({
           title: 'Image',
           options: { hotspot: true },
           fields: [
-            { title: 'Lottie', name: 'lottie', type: 'lottie' },
-            { title: 'Hide Image', name: 'hidden', type: 'boolean' },
-            getRwdField({ type: 'rect' }),
+            { title: 'Title', name: 'title', type: 'string' },
+            { title: 'Depth', name: 'depth', type: 'image' },
           ],
         },
       ],
     }),
-    {
-      title: 'Background Pattern',
-      name: 'bgPattern',
-      type: 'image',
-      options: { hotspot: true },
-    },
-    {
-      title: 'Background Pattern Size',
-      name: 'bgPatternSize',
-      type: 'string',
-    },
   ],
   preview: {
     select: {
