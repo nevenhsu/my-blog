@@ -2,13 +2,11 @@
 
 import clsx from 'clsx'
 import { MotionSlide } from '@/components/motion'
-import { px, Stack, Group, Box, Title, Text, ActionIcon } from '@mantine/core'
+import { px, Stack, Group, Box, Text, ActionIcon } from '@mantine/core'
 import { useAppContext } from '@/stores/AppContext'
 import TitlesMotion from './TitlesMotion'
-import UnderlineMotion from '@/components/motion/Underline'
-import { MyLink } from '@/components/MyLink'
 import { Href } from '@/components/sanity/Href'
-import { Body } from '@/components/Fonts'
+import { Caption } from '@/components/Fonts'
 import { HiOutlineArrowNarrowDown } from 'react-icons/hi'
 import { headerHeight } from '@/theme/config'
 import type { HomeData } from '@/types/home'
@@ -45,7 +43,7 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
 
         {/*   Subtitle  */}
         <MotionSlide delay={2.8}>
-          <Text fw={200} fz={{ base: 18, sm: 36, lg: 48 }}>
+          <Text fw={200} fz={{ base: 18, sm: 26, lg: 38 }}>
             {data.subtitle} <Href data={data.subtitleHref} />
           </Text>
         </MotionSlide>
@@ -56,11 +54,11 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
       <Box pos="absolute" w="100%" left={0} bottom={{ base: 24, sm: 40 }} px={{ base: 24, sm: 40 }}>
         <MotionSlide delay={3.2}>
           <Box pos="relative">
-            <Text>
+            <Caption>
               {data.caption1}
               {matches ? ' ' : <br />}
               {data.caption2} <Href data={data.captionHref} />
-            </Text>
+            </Caption>
 
             {/* Arrow */}
             <Box pos="absolute" right={0} bottom={0}>
@@ -69,15 +67,15 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
                 style={{ opacity }}
                 onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
               >
-                <Body className={clsx({ hide: !matches })}>{data.arrowText}</Body>
+                <Caption className={clsx({ hide: !matches })}>{data.arrowText}</Caption>
                 <ActionIcon
                   pos="relative"
                   bottom={2}
-                  size={24}
+                  size={20}
                   c="var(--mantine-color-text)"
                   variant="transparent"
                 >
-                  <HiOutlineArrowNarrowDown size={24} />
+                  <HiOutlineArrowNarrowDown size={20} />
                 </ActionIcon>
               </Group>
             </Box>
