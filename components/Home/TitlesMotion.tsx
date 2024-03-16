@@ -10,6 +10,8 @@ type TitlesMotionProps = {
   show: boolean
 }
 
+const fontSize = { base: 50, sm: 96, lg: 160 } as const
+
 export default function TitlesMotion({ data, duration, show }: TitlesMotionProps) {
   const [curr, setCurr] = useState(0)
 
@@ -20,7 +22,7 @@ export default function TitlesMotion({ data, duration, show }: TitlesMotionProps
   return (
     <Box pos="relative">
       <Title
-        fz={{ base: 64, sm: 132, lg: 160 }}
+        fz={fontSize}
         style={{
           opacity: 0,
           visibility: 'hidden',
@@ -103,7 +105,7 @@ function TitleMotion({
 
   return (
     <motion.div style={{ y, maskImage, WebkitMaskImage: maskImage }}>
-      <Title fz={{ base: 64, sm: 132, lg: 160 }}>{text}</Title>
+      <Title fz={fontSize}>{text}</Title>
     </motion.div>
   )
 }

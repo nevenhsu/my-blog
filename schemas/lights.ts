@@ -4,7 +4,7 @@ export default defineType({
   title: 'Lights',
   name: 'lights',
   type: 'object',
-  fieldsets: [{ name: 'lights', title: 'Lights', options: { collapsible: false, columns: 1 } }],
+  fieldsets: [{ name: 'lights', title: ' ', options: { collapsible: false, columns: 1 } }],
   fields: [
     defineField({
       name: 'leftLights',

@@ -6,10 +6,10 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import useQuery from '@/hooks/useQuery'
 import { useAppContext } from '@/stores/AppContext'
 import { px, Box, SimpleGrid } from '@mantine/core'
-import { MyTitle } from '@/components/Fonts'
+import { Subtitle } from '@/components/Fonts'
 import RwdBlock from '@/components/Rwd/Block'
 import MainVisual from './MainVisual'
-import NewsCard from './NewsCard'
+import NewsCard from '@/components/NewsCard'
 import Gallery from './Gallery'
 import { homeQuery } from '@/utils/sanity/queries'
 import { urlFor } from '@/utils/sanity/imageUrlBuilder'
@@ -59,9 +59,9 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
 
           {/*   News  */}
           <RwdBlock id="blog" pb={{ base: 40, sm: 80 }}>
-            <MyTitle pos="relative" ta="center">
+            <Subtitle pos="relative" ta="center">
               {data.newsTitle}
-            </MyTitle>
+            </Subtitle>
           </RwdBlock>
 
           <SimpleGrid
@@ -76,22 +76,13 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
             ))}
           </SimpleGrid>
 
-          {/*   Gradient Gap  */}
-          <Box
-            style={{
-              position: 'relative',
-              background: 'linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))',
-              height: '25vh',
-            }}
-          />
-
           <Box
             ref={ref}
             pos="relative"
             style={{ width: '100vw', background: 'var(--mantine-color-body)' }}
           >
-            {/*   Pattern  */}
-            {data.gallery?.bgPattern ? (
+            {/*  TODO:  Pattern  */}
+            {/* {data.gallery?.bgPattern ? (
               <Box
                 style={{
                   position: 'absolute',
@@ -104,22 +95,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
                   pointerEvents: 'none',
                 }}
               />
-            ) : null}
-
-            {/*   Gallery Gradient Top  */}
-            <Box style={{ position: 'sticky', top: 0, zIndex: 1 }}>
-              <motion.div style={{ y }}>
-                <motion.div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    width: '100%',
-                    height: '25vh',
-                    background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))',
-                  }}
-                />
-              </motion.div>
-            </Box>
+            ) : null} */}
 
             <Box h={{ base: 60, sm: 100 }} />
 
@@ -133,7 +109,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
               }}
             >
               <motion.div style={{ y }}>
-                <MyTitle ta="center">{data.galleryTitle}</MyTitle>
+                <Subtitle ta="center">{data.galleryTitle}</Subtitle>
               </motion.div>
             </Box>
 
@@ -147,23 +123,10 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
               mx="auto"
               style={{ overflow: 'hidden' }}
             >
-              <Gallery cols={data.gallery?.cols || 2} data={data.gallery?.images || []} />
+              <Gallery data={data.gallery?.images || []} />
             </Box>
 
             <Box h={{ base: 60, sm: 100 }} />
-
-            {/*   Gallery Gradient Bottom */}
-            <Box style={{ position: 'sticky', bottom: 0 }}>
-              <Box
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  width: '100%',
-                  height: '25vh',
-                  background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))',
-                }}
-              />
-            </Box>
           </Box>
         </Box>
       ) : null}

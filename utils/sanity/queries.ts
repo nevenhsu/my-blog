@@ -39,6 +39,7 @@ export const homeQuery = groq`
     post {
       ...,
       "slug": @->slug.current,
+      "categories": @->categories[]->title,
     },
     ${assetQuery}
   },
@@ -46,8 +47,13 @@ export const homeQuery = groq`
     ...,
     images[] {
       ...,
-      "dimensions": asset->metadata.dimensions,
-      ${assetQuery}
+      "dimensions": image.asset->metadata.dimensions,
+      image {
+        ${assetQuery}
+      },
+      depth {
+        ${assetQuery}
+      },
     }
   }
 }

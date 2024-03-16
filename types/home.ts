@@ -13,7 +13,7 @@ export type HomeData = {
   subtitleHref: HrefData
   caption1: string
   caption2: string
-  captionHref: string
+  captionHref: HrefData
   newsTitle: string
   arrowText: string
   news: SanityArray<NewsData>

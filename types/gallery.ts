@@ -8,7 +8,7 @@ export type GalleryData = {
     aspectRatio: number
   }
   title: string
-  asset: ImageAssetData
+  image: ImageAssetData
   depth: ImageAssetData
 }
 

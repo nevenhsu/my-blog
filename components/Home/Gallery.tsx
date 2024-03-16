@@ -1,30 +1,20 @@
 'use client'
 
-import { SimpleGrid, Box } from '@mantine/core'
-import useRwd from '@/hooks/useRwd'
-import { LottieImage } from '@/components/common'
+import { Stack, Box } from '@mantine/core'
 import type { GalleryDataArray, GalleryData } from '@/types/gallery'
 
-export default function Gallery({ data, cols }: { cols: number; data: GalleryDataArray }) {
+export default function Gallery({ data }: { data: GalleryDataArray }) {
   return (
     <>
-      <SimpleGrid cols={cols}>
+      <Stack>
         {data.map(d => (
           <GalleryImage key={d._key} data={d} />
         ))}
-      </SimpleGrid>
+      </Stack>
     </>
   )
 }
 
 function GalleryImage({ data }: { data: GalleryData }) {
-  const results = useRwd({ x: 'left', y: 'top', width: 'w', height: 'h' }, data.rwd, {
-    width: '100%',
-  })
-
-  return (
-    <Box pos="relative" {...results}>
-      <LottieImage value={data} />
-    </Box>
-  )
+  return <Box pos="relative"></Box>
 }

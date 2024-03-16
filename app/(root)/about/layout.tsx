@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'About | Neven’s Website',
+  title: 'About | Nathan’s Website',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

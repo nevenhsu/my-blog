@@ -12,7 +12,7 @@ export function MyTitle(props: TitleProps) {
 }
 
 export function Subtitle(props: TitleProps) {
-  return <Title fz={{ base: 20, lg: 22 }} {...props} />
+  return <Title fz={{ base: 20, lg: 22 }} fw="normal" {...props} />
 }
 
 export function Body(props: MyTextProps) {

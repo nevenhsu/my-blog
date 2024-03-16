@@ -1,4 +1,4 @@
 export type CategoryData = {
   title: string
-  description: string
+  color: string
 }

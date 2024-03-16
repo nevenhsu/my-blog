@@ -5,5 +5,8 @@ export type NewsData = {
   title: string
   subtitle: string
   asset: ImageAssetData
-  post: SanityReference & { slug: string }
+  post: SanityReference & {
+    slug: string
+    categories: string[]
+  }
 }

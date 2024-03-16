@@ -7,6 +7,7 @@ import { useAppContext } from '@/stores/AppContext'
 import TitlesMotion from './TitlesMotion'
 import UnderlineMotion from '@/components/motion/Underline'
 import { MyLink } from '@/components/MyLink'
+import { Href } from '@/components/sanity/Href'
 import { Body } from '@/components/Fonts'
 import { HiOutlineArrowNarrowDown } from 'react-icons/hi'
 import { headerHeight } from '@/theme/config'
@@ -32,9 +33,9 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
     >
       <Stack h="100%" justify="center" align="center">
         <MotionSlide delay={2.5}>
-          <Title fw={500} fz={{ base: 24, sm: 52, lg: 64 }}>
+          <Text fw={400} fz={{ base: 22, sm: 32, lg: 50 }}>
             {data.header}
-          </Title>
+          </Text>
         </MotionSlide>
 
         {/*   Titles  */}
@@ -44,14 +45,9 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
 
         {/*   Subtitle  */}
         <MotionSlide delay={2.8}>
-          <Title fw={500} fz={{ base: 20, sm: 36, lg: 48 }}>
-            {data.subtitle}{' '}
-            <MyLink href={data.subtitleBoldHref}>
-              <UnderlineMotion stroke={2}>
-                <strong>{data.subtitleBold}</strong>
-              </UnderlineMotion>
-            </MyLink>
-          </Title>
+          <Text fw={200} fz={{ base: 18, sm: 36, lg: 48 }}>
+            {data.subtitle} <Href data={data.subtitleHref} />
+          </Text>
         </MotionSlide>
         <Box w={1} h={headerHeight} />
       </Stack>
@@ -63,12 +59,7 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
             <Text>
               {data.caption1}
               {matches ? ' ' : <br />}
-              {data.caption2}{' '}
-              <MyLink href={data.captionBoldHref}>
-                <UnderlineMotion>
-                  <strong>{data.captionBold}</strong>
-                </UnderlineMotion>
-              </MyLink>
+              {data.caption2} <Href data={data.captionHref} />
             </Text>
 
             {/* Arrow */}

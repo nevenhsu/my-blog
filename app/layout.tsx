@@ -16,14 +16,14 @@ export const viewport: Viewport = {
   maximumScale: 2,
 }
 
-const title = "Neven's Website"
-const description = 'Create delightful experiences with Neven X.'
+const title = 'Nathan’s Website'
+const description = 'Create delightful experiences with Nathan X.'
 const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
 export const metadata: Metadata = {
   title,
   description,
-  authors: { name: 'Neven Xu' },
+  authors: { name: 'Nathan Xu' },
 
   openGraph: {
     title,

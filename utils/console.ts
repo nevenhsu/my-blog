@@ -3,7 +3,7 @@
 const error = console.error
 console.error = (...args: any) => {
   // hide
-  if (/spread/.test(args[0])) return
+  if (/spread|defaultProps/.test(args[0])) return
   error(...args)
 }
 const warn = console.warn
