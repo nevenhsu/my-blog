@@ -39,18 +39,23 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
 
   return (
     <>
-      {/*   Background   */}
-      <Box
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          pointerEvents: 'none',
-          zIndex: -1,
-        }}
-      ></Box>
+      {/*  Pattern Background   */}
+      {data.pattern?.image ? (
+        <Box
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            pointerEvents: 'none',
+            zIndex: -1,
+            background: `url(${urlFor(data.pattern?.image).url()}) repeat`,
+            backgroundSize: data.pattern.size || 'auto',
+            opacity: 0.1,
+          }}
+        />
+      ) : null}
 
       {!noData ? (
         <Box>
@@ -81,22 +86,6 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
             pos="relative"
             style={{ width: '100vw', background: 'var(--mantine-color-body)' }}
           >
-            {/*  TODO:  Pattern  */}
-            {/* {data.gallery?.bgPattern ? (
-              <Box
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: `url(${urlFor(data.gallery.bgPattern).url()}) repeat`,
-                  backgroundSize: data.gallery.bgPatternSize || 'auto',
-                  pointerEvents: 'none',
-                }}
-              />
-            ) : null} */}
-
             <Box h={{ base: 60, sm: 100 }} />
 
             {/*   Gallery Title  */}

@@ -115,7 +115,7 @@ export default function Fake3d(props: Fake3dProps) {
   const start = (images: HTMLImageElement[]) => {
     const gl = canvasRef.current?.getContext()
     if (!gl) {
-      throw new Error('Unable to get WebGL context')
+      return
     }
 
     const program = programRef.current
@@ -161,21 +161,25 @@ export default function Fake3d(props: Fake3dProps) {
   }
 
   const animate = () => {
-    const gl = canvasRef.current?.getContext()
-    if (!gl) {
-      throw new Error('Unable to get WebGL context')
+    try {
+      const gl = canvasRef.current?.getContext()
+      if (!gl) {
+        return
+      }
+
+      const timelapse = (new Date().getTime() - startTimeRef.current) / 1000
+      uniformsRef.current.uTime?.set(timelapse)
+
+      // inertia
+      pointRef.current.x += (pointTargetRef.current.x - pointRef.current.x) * 0.05
+      pointRef.current.y += (pointTargetRef.current.y - pointRef.current.y) * 0.05
+      uniformsRef.current.uMouse?.set(pointRef.current.x, pointRef.current.y)
+
+      billboardRef.current?.render(gl)
+      requestAnimationFrame(animate)
+    } catch (err) {
+      console.error(err)
     }
-
-    const timelapse = (new Date().getTime() - startTimeRef.current) / 1000
-    uniformsRef.current.uTime?.set(timelapse)
-
-    // inertia
-    pointRef.current.x += (pointTargetRef.current.x - pointRef.current.x) * 0.05
-    pointRef.current.y += (pointTargetRef.current.y - pointRef.current.y) * 0.05
-    uniformsRef.current.uMouse?.set(pointRef.current.x, pointRef.current.y)
-
-    billboardRef.current?.render(gl)
-    requestAnimationFrame(animate)
   }
 
   const mouse = useMouse()
@@ -186,7 +190,7 @@ export default function Fake3d(props: Fake3dProps) {
     mountRef.current = true
     const gl = canvasRef.current?.getContext()
     if (!gl) {
-      throw new Error('Unable to get WebGL context')
+      return
     }
 
     createScene(gl)

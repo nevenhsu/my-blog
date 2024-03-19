@@ -22,7 +22,7 @@ import classes from './index.module.css'
 
 type BlogProps = {
   slug: string
-  initialData: any
+  initialData: Partial<PostData>
 }
 
 export default function Blog({ slug, initialData }: BlogProps) {

@@ -36,6 +36,7 @@ export default function Header() {
   const renderMenu = (onClick: (o: Menu) => void, props: ButtonProps) => {
     return [
       { name: 'Home', href: '/' },
+      { name: 'Blog', href: '/blog' },
       { name: 'About', href: '/about' },
     ].map(o => (
       <Button

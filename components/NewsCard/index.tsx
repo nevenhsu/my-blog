@@ -23,11 +23,13 @@ export default function NewsCard({ data }: { data: Partial<NewsData> }) {
         className={clsx(classes.card, 'c-pointer')}
         onClick={() => (post?.slug ? router.push(`/blog/${post.slug}`) : null)}
       >
-        {asset ? (
-          <Box className={clsx('absolute-center', 'pointer-events-none', classes.bg)}>
-            <SanityImage image={asset} style={{ height: '100%' }} />
-          </Box>
-        ) : null}
+        <Box className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}>
+          {asset ? (
+            <Box className={classes.bg}>
+              <SanityImage image={asset} style={{ height: '100%' }} />
+            </Box>
+          ) : null}
+        </Box>
 
         <Stack className={classes.content} px={16} py={24} gap={20}>
           <MyTitle>{title}</MyTitle>
