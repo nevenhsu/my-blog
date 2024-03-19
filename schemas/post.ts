@@ -5,7 +5,10 @@ export default defineType({
   name: 'post',
   title: 'Post',
   type: 'document',
-  fieldsets: [{ name: 'password', title: 'Password', options: { collapsible: false, columns: 1 } }],
+  fieldsets: [
+    { name: 'password', title: 'Password', options: { collapsible: false, columns: 1 } },
+    { name: 'time', title: 'Time', options: { collapsible: false, columns: 2 } },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -71,6 +74,13 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+      fieldset: 'time',
+    }),
+    defineField({
+      name: 'readTime',
+      title: 'Read Time',
+      type: 'number',
+      fieldset: 'time',
     }),
     defineField({
       name: 'content',

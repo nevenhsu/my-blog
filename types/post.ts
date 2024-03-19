@@ -22,5 +22,6 @@ export type PostData = SanitySlug & {
   categories: CategoryData[]
   author: AvatarData
   publishedAt: string
+  readTime: number
   content: SanityArray<PortableTextBlock>
 }

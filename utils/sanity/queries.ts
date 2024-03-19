@@ -17,6 +17,15 @@ lottie {
 }
 `
 
+const avatarQuery = groq`
+avatar -> {
+  ...,
+  image {
+    ${assetQuery}
+  }
+}
+`
+
 const imageQuery = groq`
 *[_id == $id][0] 
 `
@@ -155,11 +164,8 @@ const blockContent = groq`
 }
 `
 
-export const postQuery = groq`
-*[_type=='post' && slug.current == $slug][0]
-{
+const postDataQuery = groq`
   ...,
-  author->,
   categories[]->,
   mainImage {
     ...,
@@ -170,13 +176,38 @@ export const postQuery = groq`
     lg { ..., ${assetQuery} },
     xl { ..., ${assetQuery} }
   },
-  content[] ${blockContent}
+  ${avatarQuery},
+`
+
+export const postQuery = groq`
+*[_type=='post' && slug.current == $slug][0]
+{ 
+  ${postDataQuery}
+  content[] ${blockContent},
 }
 `
 
 export async function getPostData(slug: string) {
   try {
     const data = await client.fetch(postQuery, { slug })
+    return data
+  } catch (err) {
+    console.error(err)
+    return {}
+  }
+}
+
+export const postsQuery = groq`
+*[_type=='post'] | order(publishedAt desc)
+{ 
+  ${postDataQuery} 
+  "content": null
+}
+`
+
+export async function getPostsData() {
+  try {
+    const data = await client.fetch(postsQuery)
     return data
   } catch (err) {
     console.error(err)
@@ -194,12 +225,7 @@ export const aboutQuery = groq`
   },
   commends[] -> {
     ...,
-    avatar -> {
-      ...,
-      image {
-        ${assetQuery}
-      }
-    }
+    ${avatarQuery}
   },
   body[] ${blockContent}
 }
