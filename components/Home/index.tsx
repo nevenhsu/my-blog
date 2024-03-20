@@ -2,10 +2,8 @@
 
 import _ from 'lodash'
 import { useRef, useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import useQuery from '@/hooks/useQuery'
-import { useAppContext } from '@/stores/AppContext'
-import { px, Box, SimpleGrid } from '@mantine/core'
+import { Box, SimpleGrid } from '@mantine/core'
 import { Subtitle } from '@/components/Fonts'
 import RwdBlock from '@/components/Rwd/Block'
 import MainVisual from './MainVisual'
@@ -17,20 +15,10 @@ import type { HomeData } from '@/types/home'
 
 export default function Home({ initialData }: { initialData: Partial<HomeData> }) {
   const ref = useRef(null)
-  const scroll = useScroll({ target: ref })
 
   const [data] = useQuery<Partial<HomeData>>(initialData, homeQuery)
   const noData = _.isEmpty(data)
-
-  const { state } = useAppContext()
-  const { width } = state.viewportSize
-  const matches = width >= Number(px('48em'))
-  const matchesXl = width >= Number(px('88em'))
-
   const [show, setShow] = useState(false)
-
-  const rwdTop = matchesXl ? 140 : matches ? 100 : 92
-  const y = useTransform(scroll.scrollYProgress, [0, 0.75, 1], [0, 0, -rwdTop - 40])
 
   useEffect(() => {
     if (noData) return
@@ -81,25 +69,12 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
             ))}
           </SimpleGrid>
 
-          <Box
-            ref={ref}
-            pos="relative"
-            style={{ width: '100vw', background: 'var(--mantine-color-body)' }}
-          >
+          <Box ref={ref} pos="relative" style={{ width: '100vw' }}>
             <Box h={{ base: 60, sm: 100 }} />
 
             {/*   Gallery Title  */}
-            <Box
-              style={{
-                position: 'sticky',
-                top: rwdTop,
-                zIndex: 1,
-                filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
-              }}
-            >
-              <motion.div style={{ y }}>
-                <Subtitle ta="center">{data.galleryTitle}</Subtitle>
-              </motion.div>
+            <Box>
+              <Subtitle ta="center">{data.galleryTitle}</Subtitle>
             </Box>
 
             <Box h={{ base: 60, sm: 100 }} />

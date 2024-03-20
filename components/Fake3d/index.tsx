@@ -3,6 +3,8 @@
 import { useRef, useEffect, useLayoutEffect } from 'react'
 import { useMouse } from '@mantine/hooks'
 import { useScroll } from 'framer-motion'
+import { useAppContext } from '@/stores/AppContext'
+import { px } from '@mantine/core'
 import MyCanvas, { type MyCanvasRef } from './MyCanvas'
 import Uniform from './lib/webgl/uniform'
 import Rect from './lib/webgl/rect'
@@ -36,6 +38,10 @@ export default function Fake3d(props: Fake3dProps) {
   const pointRef = useRef<Point>({ x: 0, y: 0 })
   const pointTargetRef = useRef<Point>({ x: 0, y: 0 })
   const startTimeRef = useRef<number>(new Date().getTime())
+
+  const { state } = useAppContext()
+  const { width } = state.viewportSize
+  const matches = width >= Number(px('48em'))
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -197,15 +203,17 @@ export default function Fake3d(props: Fake3dProps) {
   }, [])
 
   useEffect(() => {
-    updatePoint({ x: mouse.x, y: mouse.y })
-  }, [mouse])
+    if (matches) {
+      updatePoint({ x: mouse.x, y: mouse.y })
+    }
+  }, [mouse, matches])
 
   useEffect(() => {
     scrollYProgress.on('change', (v: number) => {
       const { width, height } = getSize()
 
-      const x = width * (1 - v) * 1.5
-      const y = height * v * 1.5
+      const x = width * (1 - v) * 2
+      const y = height * v * 2
 
       updatePoint({ x, y })
     })

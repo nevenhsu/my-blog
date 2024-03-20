@@ -31,7 +31,7 @@ function GalleryImage({ data }: { data: GalleryData }) {
         className={clsx('absolute-center', classes.galleryTitle)}
         fw={200}
         w={{ base: '75%', sm: '50%', lg: '40%' }}
-        py={10}
+        py={{ base: 10, sm: 20 }}
       >
         {data.title}
       </MyTitle>
