@@ -20,6 +20,15 @@ export function BlogCard({ data }: { data: Partial<PostData> }) {
 
   return (
     <Box ref={ref} className={clsx(classes.card, 'c-pointer')}>
+      <Box
+        className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}
+        style={{
+          background: 'var(--mantine-color-body)',
+          opacity: 0.6,
+        }}
+      />
+
+      {/*   Background Image  */}
       <Box className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}>
         {imageAsset ? (
           <Box className={classes.bg}>

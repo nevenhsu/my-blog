@@ -23,6 +23,7 @@ export default function NewsCard({ data }: { data: Partial<NewsData> }) {
         className={clsx(classes.card, 'c-pointer')}
         onClick={() => (post?.slug ? router.push(`/blog/${post.slug}`) : null)}
       >
+        {/*   Background Image  */}
         <Box className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}>
           {asset ? (
             <Box className={classes.bg}>

@@ -13,7 +13,6 @@ import NewsCard from '@/components/NewsCard'
 import Gallery from './Gallery'
 import MyCanvas, { type MyCanvasRef } from '@/components/threejs/MyCanvas'
 import { homeQuery } from '@/utils/sanity/queries'
-import { urlFor } from '@/utils/sanity/imageUrlBuilder'
 import classes from './index.module.css'
 import type { HomeData } from '@/types/home'
 
@@ -62,8 +61,9 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
         <Box
           className={classes.fixed}
           style={{
-            background: `url(${urlFor(data.pattern?.image).url()}) repeat`,
-            backgroundSize: data.pattern.size || 'auto',
+            zIndex: 0,
+            background: `url('/images/dots.png') repeat`,
+            backgroundSize: '64px',
             opacity: 0.1,
           }}
         />
@@ -105,19 +105,6 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
             pos="relative"
             style={{ width: '100vw', background: 'var(--mantine-color-body)' }}
           >
-            {/*  Pattern Background   */}
-            {data.pattern?.image ? (
-              <Box
-                className={classes.fixed}
-                style={{
-                  zIndex: 0,
-                  background: `url(${urlFor(data.pattern?.image).url()}) repeat`,
-                  backgroundSize: data.pattern.size || 'auto',
-                  opacity: 0.1,
-                }}
-              />
-            ) : null}
-
             <Box h={{ base: 60, sm: 100 }} />
 
             <Box>
@@ -128,7 +115,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
 
             {/*   Gallery images  */}
             <Box
-              w={{ base: '100vw', lg: 1280 }}
+              w={{ base: '100vw', lg: 992 }}
               px={{ base: 0, sm: 40 }}
               pb={40}
               mx="auto"
