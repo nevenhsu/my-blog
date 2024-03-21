@@ -4,7 +4,7 @@ import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 import { useResizeObserver } from '@mantine/hooks'
 import type { ComponentProps } from 'react'
 
-type Size = { width?: number; height?: number }
+export type Size = { width?: number; height?: number }
 
 type MyCanvasProps = {
   uid: string

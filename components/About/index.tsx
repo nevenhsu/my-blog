@@ -26,6 +26,8 @@ export default function About({ initialData }: AboutProps) {
   const renderCommends = () =>
     data.commends?.map((o, i) => <Commend key={`${o._key}-${i}`} data={o} />)
 
+  if (!data) return null
+
   return (
     <RwdLayout
       style={{

@@ -1,15 +1,16 @@
 'use client'
 
-import { useRef, useEffect, useLayoutEffect } from 'react'
+import { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import { useMouse } from '@mantine/hooks'
 import { useScroll } from 'framer-motion'
 import { useAppContext } from '@/stores/AppContext'
 import { px } from '@mantine/core'
-import MyCanvas, { type MyCanvasRef } from './MyCanvas'
+import MyCanvas from './MyCanvas'
 import Uniform from './lib/webgl/uniform'
 import Rect from './lib/webgl/rect'
 import { fragmentShader, vertexShader } from './shades'
 import { loadImages } from './lib/helper'
+import type { MyCanvasRef, Size } from './MyCanvas'
 
 type Point = {
   x: number
@@ -33,11 +34,13 @@ export default function Fake3d(props: Fake3dProps) {
   const programRef = useRef<WebGLProgram | null>(null)
   const uniformsRef = useRef<{ [key: string]: Uniform }>({})
   const texturesRef = useRef<WebGLTexture[]>([])
-  const imageAspectRef = useRef<number>(0.56)
   const billboardRef = useRef<Rect | null>(null)
   const pointRef = useRef<Point>({ x: 0, y: 0 })
   const pointTargetRef = useRef<Point>({ x: 0, y: 0 })
   const startTimeRef = useRef<number>(new Date().getTime())
+
+  const [size, setSize] = useState<Size>({ width: 0, height: 0 })
+  const [imageAspect, setImageAspect] = useState<number>(0)
 
   const { state } = useAppContext()
   const { width } = state.viewportSize
@@ -129,8 +132,6 @@ export default function Fake3d(props: Fake3dProps) {
       throw new Error('Unable to get program')
     }
 
-    imageAspectRef.current = images[0].naturalHeight / images[0].naturalWidth
-
     for (var i = 0; i < images.length; i++) {
       const texture = gl.createTexture()
       if (!texture) {
@@ -164,6 +165,7 @@ export default function Fake3d(props: Fake3dProps) {
     gl.bindTexture(gl.TEXTURE_2D, texturesRef.current[1])
 
     animate()
+    setImageAspect(images[0].naturalHeight / images[0].naturalWidth)
   }
 
   const animate = () => {
@@ -226,29 +228,31 @@ export default function Fake3d(props: Fake3dProps) {
     addTexture()
   }, [imageUrl])
 
+  useEffect(() => {
+    const { width, height } = size
+    if (!width || !height) return
+
+    let a1, a2
+    if (height / width < imageAspect) {
+      a1 = 1
+      a2 = height / width / imageAspect
+    } else {
+      a1 = (width / height) * imageAspect
+      a2 = 1
+    }
+
+    uniformsRef.current.uResolution?.set(width, height, a1, a2)
+    uniformsRef.current.uRatio?.set(1 / window.devicePixelRatio)
+    uniformsRef.current.uThreshold?.set(horizontalThreshold, verticalThreshold)
+  }, [size, imageAspect])
+
   return (
     <div ref={ref} style={{ width: '100%', height: '100%' }}>
       <MyCanvas
         ref={canvasRef}
         uid={uid}
         onResize={size => {
-          const { width, height } = size
-          if (!width || !height) return
-
-          const imageAspect = imageAspectRef.current
-
-          let a1, a2
-          if (height / width < imageAspect) {
-            a1 = 1
-            a2 = height / width / imageAspect
-          } else {
-            a1 = (width / height) * imageAspect
-            a2 = 1
-          }
-
-          uniformsRef.current.uResolution?.set(width, height, a1, a2)
-          uniformsRef.current.uRatio?.set(1 / window.devicePixelRatio)
-          uniformsRef.current.uThreshold?.set(horizontalThreshold, verticalThreshold)
+          setSize(size)
         }}
       />
     </div>
