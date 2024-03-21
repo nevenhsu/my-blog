@@ -16,7 +16,7 @@ export default function BlogList({ initialData }: BlogListProps) {
   const [data] = useQuery<Array<PostData>>(initialData, postsQuery)
 
   return (
-    <RwdLayout>
+    <RwdLayout w={{ base: '100%', lg: 896 }}>
       <Box h={32} />
 
       <Stack gap={24}>
