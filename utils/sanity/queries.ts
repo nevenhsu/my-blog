@@ -56,13 +56,11 @@ export const homeQuery = groq`
     ...,
     images[] {
       ...,
-      "dimensions": image.asset->metadata.dimensions,
-      image {
+      "dimensions": lottieImage.asset->metadata.dimensions,
+      lottieImage {
+        ...,
         ${assetQuery}
-      },
-      depth {
-        ${assetQuery}
-      },
+      }
     }
   }
 }

@@ -3,8 +3,9 @@ import grid from './grid'
 import space from './space'
 import layout from './layout'
 import lottie from './lottie'
+import lottieImage from './lottieImage'
+import lottieTitle from './lottieTitle'
 import iframe from './iframe'
-import fake3d from './fake3d'
 import rwd from './rwd'
 import gallery from './gallery'
 import lights from './lights'
@@ -34,8 +35,9 @@ export const schemaTypes = [
   grid,
   layout,
   lottie,
+  lottieImage,
+  lottieTitle,
   iframe,
-  fake3d,
   gallery,
   lights,
   pattern,

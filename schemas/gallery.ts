@@ -10,7 +10,12 @@ export default defineType({
       title: 'Images',
       type: 'array',
       options: { layout: 'grid' },
-      of: [{ type: 'fake3d' }],
+      of: [{ type: 'lottieTitle' }],
     }),
   ],
+  preview: {
+    select: {
+      media: 'lottieImage',
+    },
+  },
 })

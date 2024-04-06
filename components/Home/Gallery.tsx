@@ -1,10 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
-import { Stack, AspectRatio, Box } from '@mantine/core'
-import Fake3d from '@/components/Fake3d'
+import { Stack, Box } from '@mantine/core'
 import { MyTitle } from '@/components/Fonts'
-import { urlFor } from '@/utils/sanity/imageUrlBuilder'
+import { LottieImage } from '@/components/sanity/LottieImage'
 import classes from './index.module.css'
 import type { GalleryDataArray, GalleryData } from '@/types/gallery'
 
@@ -21,12 +20,11 @@ export default function Gallery({ data }: { data: GalleryDataArray }) {
 }
 
 function GalleryImage({ data }: { data: GalleryData }) {
-  const { image, depth, dimensions } = data
+  const { lottieImage } = data
+
   return (
     <Box pos="relative">
-      <AspectRatio ratio={dimensions.aspectRatio}>
-        <Fake3d uid={data.title} imageUrl={urlFor(image).url()} depthUrl={urlFor(depth).url()} />
-      </AspectRatio>
+      <LottieImage value={lottieImage} />
       <MyTitle
         className={clsx('absolute-center', classes.galleryTitle)}
         fw={200}

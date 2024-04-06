@@ -3,17 +3,17 @@
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 import { Box } from '@mantine/core'
-import SanityImage from '@/components/sanity/Image'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import Lottie from 'lottie-react'
-import type { ImageAssetData } from '@/types/image'
-import type { LottieData } from '@/types/lottie'
+import SanityImage from '@/components/sanity/Image'
+import type { LottieImageData } from '@/types/lottieImage'
 
 type LottieImageProps = {
-  value: { asset?: ImageAssetData; lottie?: LottieData; hidden?: boolean }
+  value: LottieImageData
 }
 
 export function LottieImage({ value }: LottieImageProps) {
-  const { asset, lottie, hidden } = value
+  const { asset, lottie, hidden = true } = value
   const [animationData, setAnimationData] = useState<object>()
 
   useEffect(() => {
@@ -21,8 +21,8 @@ export function LottieImage({ value }: LottieImageProps) {
     if (url) {
       fetch(url)
         .then(res => res.json())
-        .then(json => {
-          setAnimationData(json)
+        .then(data => {
+          setAnimationData(data)
         })
         .catch(console.error)
     }
@@ -36,9 +36,10 @@ export function LottieImage({ value }: LottieImageProps) {
           style={{ visibility: hidden && animationData ? 'hidden' : 'unset' }}
         />
       ) : null}
+
       {animationData ? (
         <Box className={clsx({ 'absolute-center': Boolean(asset) })} w="100%" h="auto">
-          <Lottie animationData={animationData} loop />
+          <Lottie animationData={animationData} loop autoplay />
         </Box>
       ) : null}
     </Box>

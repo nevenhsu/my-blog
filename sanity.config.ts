@@ -1,5 +1,5 @@
 import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
+import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { media } from 'sanity-plugin-media'
 import { table } from '@sanity/table'
@@ -18,7 +18,7 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [
-    deskTool({ defaultDocumentNode }),
+    structureTool({ defaultDocumentNode }),
     visionTool(),
     media(),
     colorInput(),

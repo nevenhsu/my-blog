@@ -1,7 +1,8 @@
-import { DefaultDocumentNodeResolver } from 'sanity/desk'
+
 import { Iframe } from 'sanity-plugin-iframe-pane'
 import { SanityDocument } from 'sanity'
 import { publicEnv } from '@/utils/env'
+import type { DefaultDocumentNodeResolver } from 'sanity/structure'
 
 // Customise this function to show the correct URL based on the current document
 function getPreviewUrl(doc: SanityDocument) {
