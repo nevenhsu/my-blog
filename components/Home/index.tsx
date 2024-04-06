@@ -107,11 +107,11 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
           >
             <Box h={{ base: 60, sm: 100 }} />
 
-            <Box>
-              <Subtitle ta="center">{data.galleryTitle}</Subtitle>
-            </Box>
-
-            <Box h={{ base: 60, sm: 100 }} />
+            {data.galleryTitle ? (
+              <Box mb={{ base: 60, sm: 100 }}>
+                <Subtitle ta="center">{data.galleryTitle}</Subtitle>
+              </Box>
+            ) : null}
 
             {/*   Gallery images  */}
             <Box

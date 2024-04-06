@@ -3,7 +3,6 @@
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 import { Box } from '@mantine/core'
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import Lottie from 'lottie-react'
 import SanityImage from '@/components/sanity/Image'
 import type { LottieImageData } from '@/types/lottieImage'
@@ -14,7 +13,7 @@ type LottieImageProps = {
 
 export function LottieImage({ value }: LottieImageProps) {
   const { asset, lottie, hidden = true } = value
-  const [animationData, setAnimationData] = useState<object>()
+  const [animationData, setAnimationData] = useState<any>()
 
   useEffect(() => {
     const url = lottie?.url

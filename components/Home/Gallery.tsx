@@ -24,7 +24,9 @@ function GalleryImage({ data }: { data: GalleryData }) {
 
   return (
     <Box pos="relative">
-      <LottieImage value={lottieImage} />
+      <Box w={{ base: '100%', sm: '75%' }} mx="auto">
+        <LottieImage value={lottieImage} />
+      </Box>
       <MyTitle
         className={clsx('absolute-center', classes.galleryTitle)}
         fw={200}
