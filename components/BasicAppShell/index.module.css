@@ -19,7 +19,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: #0f0f0f80;
   transition: opacity 500ms;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

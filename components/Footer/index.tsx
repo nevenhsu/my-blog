@@ -4,7 +4,7 @@ import useQuery from '@/hooks/useQuery'
 import { useAppContext } from '@/stores/AppContext'
 import { MotionSlide } from '@/components/motion'
 import { px, Group } from '@mantine/core'
-import { MyTitle, Body } from '@/components/Fonts'
+import { MyTitle, Subtitle, Body } from '@/components/Fonts'
 import RwdBlock from '@/components/Rwd/Block'
 import PopoverIcon from './PopoverIcon'
 import DrawerIcon from './DrawerIcon'
@@ -31,16 +31,16 @@ export default function Footer({ initialData }: { initialData: Partial<FooterDat
     >
       <MotionSlide delay={3}>
         <MyTitle mb={40}>{data?.title}</MyTitle>
-        <Body mb={12}>{data?.description}</Body>
+        <Body mb={20}>{data?.description}</Body>
 
         {email ? (
-          <MyTitle
+          <Subtitle
             className="c-pointer"
-            mb={60}
+            mb={40}
             onClick={() => (window.location.href = `mailto:${email}`)}
           >
             {email}
-          </MyTitle>
+          </Subtitle>
         ) : null}
 
         <Group gap={24} justify="center">

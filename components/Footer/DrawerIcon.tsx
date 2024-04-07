@@ -1,12 +1,21 @@
+'use client'
+
 import { useDisclosure } from '@mantine/hooks'
 import { Box, Stack, Drawer, ActionIcon } from '@mantine/core'
 import { MyTitle } from '@/components/Fonts'
 import { SocialIcon, TitleGroup, CopyName } from './common'
 import { HiOutlineX } from 'react-icons/hi'
+import LinkIcon from './LinkIcon'
 import type { SocialIconData } from '@/types/socialIcon'
 
 export default function DrawerIcon({ data }: { data: Partial<SocialIconData> }) {
   const [opened, { open, close }] = useDisclosure(false)
+  const { noPopup } = data
+  const { asset } = data.qrcode || {}
+
+  if (!asset || noPopup) {
+    return <LinkIcon data={data} />
+  }
 
   return (
     <>

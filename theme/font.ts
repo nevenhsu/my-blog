@@ -1,7 +1,7 @@
 import { Poppins, Nunito } from 'next/font/google'
 
 const title = Poppins({
-  weight: ['200', '400', '700', '900'],
+  weight: ['200', '500', '700', '900'],
   subsets: ['latin'],
   variable: '--next-title',
 })

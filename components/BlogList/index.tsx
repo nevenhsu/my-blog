@@ -28,7 +28,7 @@ export default function BlogList({ initialData }: BlogListProps) {
         }}
       />
 
-      <Box h={32} />
+      <Box h={40} />
 
       <Stack gap={24}>
         {_.map(data, (post, i) => (

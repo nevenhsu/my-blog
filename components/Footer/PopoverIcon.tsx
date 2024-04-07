@@ -1,25 +1,16 @@
 import { Box, Popover } from '@mantine/core'
-import { Subtitle } from '@/components/Fonts'
+import { Body } from '@/components/Fonts'
 import SanityImage from '@/components/sanity/Image'
+import LinkIcon from './LinkIcon'
 import { SocialIcon, TitleGroup, CopyName } from './common'
 import type { SocialIconData } from '@/types/socialIcon'
 
 export default function PopoverIcon({ data }: { data: SocialIconData }) {
-  const { username, href, noPopup } = data
+  const { username, noPopup } = data
   const { asset } = data.qrcode || {}
 
-  const handleOpen = () => {
-    if (href) {
-      window.open(href, '_blank', 'noopener,noreferrer')
-    }
-  }
-
   if (!asset || noPopup) {
-    return (
-      <Box onClick={handleOpen}>
-        <SocialIcon data={data} />
-      </Box>
-    )
+    return <LinkIcon data={data} />
   }
 
   return (
@@ -30,7 +21,7 @@ export default function PopoverIcon({ data }: { data: SocialIconData }) {
       shadow="md"
       radius={24}
       styles={{
-        dropdown: { padding: 24, background: '#000' },
+        dropdown: { padding: 24, background: 'var(--mantine-color-black)' },
       }}
     >
       <Popover.Target>
@@ -44,7 +35,7 @@ export default function PopoverIcon({ data }: { data: SocialIconData }) {
             <SanityImage image={asset} />
           </Box>
 
-          <Subtitle mb={4}>{username}</Subtitle>
+          <Body mb={4}>{username}</Body>
 
           <CopyName data={data} />
         </Box>

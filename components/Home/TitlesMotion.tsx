@@ -79,11 +79,11 @@ function TitleMotion({
     [0, 25, 50, 75, 100],
     [
       // top, bottom
-      'linear-gradient(rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 0) 100%)', // init
-      'linear-gradient(rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 1) 100%)',
-      'linear-gradient(rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%)', // show
-      'linear-gradient(rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%)',
-      'linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)', // hide
+      'linear-gradient(#00000000 100%, #00000000 100%)', // init
+      'linear-gradient(#00000000 20%, #000000 100%)',
+      'linear-gradient(#000000 0%, #000000 100%)', // show
+      'linear-gradient(#000000 0%, #00000000 90%)',
+      'linear-gradient(#00000000 0%, #00000000 0%)', // hide
     ]
   )
   const y = useTransform(x, [0, 25, 50, 75, 100], [24, 0, 0, -12, -24])

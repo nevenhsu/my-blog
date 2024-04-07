@@ -85,7 +85,9 @@ function DotProgress({ duration, isCurr, pause, onComplete }: DotProgressProps) 
       controls.pause()
     }
 
-    return controls.stop
+    return () => {
+      controls.stop()
+    }
   }, [width, isCurr, duration, pause, onComplete])
 
   return (

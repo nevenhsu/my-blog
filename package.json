@@ -18,7 +18,7 @@
     "@mantine/hooks": "^7.7.1",
     "@mantine/modals": "^7.7.1",
     "@portabletext/react": "^3.0.17",
-    "@react-three/drei": "^9.105.1",
+    "@react-three/drei": "^9.105.2",
     "@react-three/fiber": "^8.16.1",
     "@react-three/postprocessing": "^2.16.2",
     "@reduxjs/toolkit": "^2.2.3",

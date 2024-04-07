@@ -96,7 +96,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
           <Box
             h={{ base: 60, sm: 100 }}
             style={{
-              background: 'linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
+              background: 'linear-gradient(#0f0f0f00 0%, #0f0f0f 100%)',
             }}
           />
 
@@ -114,15 +114,7 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
             ) : null}
 
             {/*   Gallery images  */}
-            <Box
-              w={{ base: '100vw', lg: 992 }}
-              px={{ base: 0, sm: 40 }}
-              pb={40}
-              mx="auto"
-              style={{ overflow: 'hidden' }}
-            >
-              <Gallery data={data.gallery?.images || []} />
-            </Box>
+            <Gallery data={data.gallery?.images || []} />
 
             <Box h={{ base: 60, sm: 100 }} />
           </Box>

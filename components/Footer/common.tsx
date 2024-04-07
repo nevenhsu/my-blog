@@ -9,7 +9,7 @@ type SocialIconProps = { data: Partial<SocialIconData> } & typeof ActionIcon.def
 
 export const SocialIcon = forwardRef(function SocialIcon({ data, ...rest }: SocialIconProps, ref) {
   return (
-    <ActionIcon ref={ref} c="white" variant="transparent" {...rest}>
+    <ActionIcon size={32} ref={ref} c="white" variant="transparent" {...rest}>
       {getIcon(data.icon, { size: 24 })}
     </ActionIcon>
   )
@@ -23,7 +23,7 @@ const handleOpen = (href?: string) => {
 
 export function TitleGroup({ data }: { data: Partial<SocialIconData> }) {
   return (
-    <Group justify="center">
+    <Group justify="center" gap={20}>
       {getIcon(data.icon, { size: 24 })}
       <Subtitle>{getName(data.icon)}</Subtitle>
       <ActionIcon
