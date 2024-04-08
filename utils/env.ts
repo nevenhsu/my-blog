@@ -3,6 +3,7 @@ import _ from 'lodash'
 // private
 const env = {
   sanityToken: process.env.SANITY_API_READ_TOKEN,
+  locales: ['en', 'zh'],
 }
 
 // for browser by prefixing with NEXT_PUBLIC_

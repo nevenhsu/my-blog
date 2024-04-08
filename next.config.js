@@ -1,5 +1,9 @@
+const createNextIntlPlugin = require('next-intl/plugin')
+
 const isProd = process.env.NODE_ENV === 'production'
 const compiler = isProd ? { removeConsole: true } : {}
+
+const withNextIntl = createNextIntlPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -28,4 +32,4 @@ const nextConfig = {
   transpilePackages: ['three'],
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)

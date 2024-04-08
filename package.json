@@ -36,6 +36,7 @@
     "lodash": "^4",
     "lottie-react": "^2.4.0",
     "next": "14.1.4",
+    "next-intl": "^3.11.1",
     "next-sanity": "^8.5.3",
     "next-sanity-image": "^6.1.1",
     "prism-themes": "^1.9.0",
@@ -50,6 +51,7 @@
     "sanity": "^3.36.4",
     "sanity-plugin-iframe-pane": "^3.1.6",
     "sanity-plugin-media": "^2.2.5",
+    "styled-components": "^6.1.8",
     "three": "^0.163.0"
   },
   "devDependencies": {

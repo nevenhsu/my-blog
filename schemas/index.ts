@@ -28,6 +28,7 @@ import titleCard from './titleCard'
 import contentCard from './contentCard'
 import textCard from './textCard'
 import mCode from './mCode'
+import metadata from './metadata'
 import dev from './dev'
 
 export const schemaTypes = [
@@ -61,5 +62,6 @@ export const schemaTypes = [
   titleCard,
   contentCard,
   textCard,
+  metadata,
   dev,
 ]

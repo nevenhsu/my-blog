@@ -1,7 +1,6 @@
 import Studio from '@/components/Studio'
 // Set the right `viewport`, `robots` and `referer` meta tags
-import { metadata as studioMetadata } from 'next-sanity/studio/metadata'
-import { viewport as studioViewport } from 'next-sanity/studio/viewport'
+import { metadata as studioMetadata, viewport as studioViewport } from 'next-sanity/studio'
 import type { Metadata, Viewport } from 'next'
 
 // Ensures the Studio route is statically generated

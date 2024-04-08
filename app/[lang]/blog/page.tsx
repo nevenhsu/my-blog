@@ -2,9 +2,10 @@ import { draftMode } from 'next/headers'
 import { getPostsData } from '@/utils/sanity/queries'
 import BlogList from '@/components/BlogList'
 
-export default async function BlogPage() {
+export default async function BlogPage({ params: { lang } }: { params: { lang: string } }) {
   const { isEnabled } = draftMode()
   const data = isEnabled ? {} : await getPostsData()
+
   return <BlogList initialData={data} />
 }
 

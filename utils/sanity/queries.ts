@@ -255,3 +255,24 @@ export async function getDevData() {
     return {}
   }
 }
+
+export const metadataQuery = groq`
+*[_type=='metadata'][0]
+{
+  ...,
+  cover {
+    ...,
+    "url": @.asset->url,
+    "mimeType": @.asset->mimeType,
+    "dimensions": @.asset->metadata.dimensions,
+  },
+  svg {
+    ...,
+    "url": @.asset->url,
+  },
+  png {
+    ...,
+    "url": @.asset->url,
+  },
+}
+`
