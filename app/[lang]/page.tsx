@@ -5,9 +5,9 @@ import { getHomeData } from '@/utils/sanity/queries'
 
 export const revalidate = 3600 // revalidate at most every hour
 
-export default async function Page() {
+export default async function Page({ params: { lang } }: { params: { lang: string } }) {
   const { isEnabled } = draftMode()
-  const data = isEnabled ? {} : await getHomeData()
+  const data = isEnabled ? {} : await getHomeData(lang)
 
   return (
     <Box

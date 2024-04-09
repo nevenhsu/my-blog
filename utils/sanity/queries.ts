@@ -40,7 +40,7 @@ export async function getImageData(id: string) {
 }
 
 export const homeQuery = groq`
-*[_type=='home'][0]
+*[_type=='home' && lang==$lang][0]
 {
   ...,
   news[] {
@@ -62,13 +62,20 @@ export const homeQuery = groq`
         ${assetQuery}
       }
     }
+  },
+  pattern {
+    ...,
+    image {
+      ...,
+      "url": @.asset->url
+    }
   }
 }
 `
 
-export async function getHomeData(): Promise<Partial<HomeData>> {
+export async function getHomeData(lang: string): Promise<Partial<HomeData>> {
   try {
-    const data = await client.fetch<HomeData>(homeQuery)
+    const data = await client.fetch<HomeData>(homeQuery, { lang })
     return data
   } catch (err) {
     console.error(err)

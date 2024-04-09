@@ -57,13 +57,13 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
       </Box>
 
       {/*  Pattern Background   */}
-      {data.pattern?.image ? (
+      {data?.pattern?.image ? (
         <Box
           className={classes.fixed}
           style={{
             zIndex: 0,
-            background: `url('/images/dots.png') repeat`,
-            backgroundSize: '64px',
+            background: `url('${data.pattern.image.url}') repeat`,
+            backgroundSize: data.pattern.size,
             opacity: 0.1,
           }}
         />

@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { lang } from './fields/lang'
 
 export default defineType({
   name: 'home',
@@ -9,6 +10,7 @@ export default defineType({
     { name: 'news', title: 'News', options: { collapsible: false, columns: 2 } },
   ],
   fields: [
+    lang,
     defineField({
       name: 'header',
       title: 'Header',

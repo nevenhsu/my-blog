@@ -1,6 +1,4 @@
-import type { SanityReference } from './common'
-
 export type PatternData = {
-  image: SanityReference
+  image: { url: string }
   size: string
 }
