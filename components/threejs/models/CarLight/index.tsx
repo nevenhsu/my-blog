@@ -11,7 +11,8 @@ import type { Mesh, Vector2, ShaderMaterial } from 'three'
 type CarLightProps = {
   meshProps: MeshProps
   fade: Vector2
-  color: Array<string | number>
+  color1: Array<string | number>
+  color2: Array<string | number>
   side: number // 1: right, -1: left
 }
 
@@ -20,7 +21,7 @@ type UniformsKeys = 'uColor' | 'uTravelLength' | 'uTime' | 'uSpeed'
 export type CarLightRef = HandleRef<UniformsKeys>
 
 export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
-  { meshProps, fade, color, side },
+  { meshProps, fade, color1, color2, side },
   ref
 ) {
   const meshRef = useRef<Mesh<TubeGeometry, ShaderMaterial>>(null)
@@ -34,10 +35,12 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
 
     const aOffset = []
     const aMetrics = []
-    const aColor = []
+    const aColor1 = []
+    const aColor2 = []
 
     const laneWidth = options.roadWidth / options.lanesPerRoad
-    const colors = color.map(c => new Color(c))
+    const colors1 = color1.map(c => new Color(c))
+    const colors2 = color2.map(c => new Color(c))
     const movingSpeed = side > 0 ? options.movingCloserSpeed : options.movingAwaySpeed
 
     for (let i = 0; i < options.nPairs; i++) {
@@ -73,14 +76,23 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       aMetrics.push(length)
       aMetrics.push(speed)
 
-      const color = _.sample(colors) || colors[0]
-      aColor.push(color.r)
-      aColor.push(color.g)
-      aColor.push(color.b)
+      const c1 = _.sample(colors1) || colors1[0]
+      aColor1.push(c1.r)
+      aColor1.push(c1.g)
+      aColor1.push(c1.b)
 
-      aColor.push(color.r)
-      aColor.push(color.g)
-      aColor.push(color.b)
+      aColor1.push(c1.r)
+      aColor1.push(c1.g)
+      aColor1.push(c1.b)
+
+      const c2 = _.sample(colors2) || colors2[0]
+      aColor2.push(c2.r)
+      aColor2.push(c2.g)
+      aColor2.push(c2.b)
+
+      aColor2.push(c2.r)
+      aColor2.push(c2.g)
+      aColor2.push(c2.b)
     }
 
     return {
@@ -88,7 +100,8 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       attributes: {
         aOffset: new InstancedBufferAttribute(new Float32Array(aOffset), 3, false),
         aMetrics: new InstancedBufferAttribute(new Float32Array(aMetrics), 3, false),
-        aColor: new InstancedBufferAttribute(new Float32Array(aColor), 3, false),
+        aColor1: new InstancedBufferAttribute(new Float32Array(aColor1), 3, false),
+        aColor2: new InstancedBufferAttribute(new Float32Array(aColor2), 3, false),
         ...tube.attributes,
       },
     }
@@ -99,6 +112,7 @@ export default forwardRef<CarLightRef, CarLightProps>(function CarLight(
       uTravelLength: new Uniform(options.length),
       uTime: new Uniform(0),
       uFade: new Uniform(fade),
+      uTransitionSpeed: new Uniform(0.5),
       ...options.distortion.uniforms,
     }
   }, [])

@@ -108,7 +108,8 @@ const Scene = forwardRef<MyCanvasRef, {}>(function Scene(props, ref) {
         ref={carLightLRef}
         meshProps={{ position: [-options.roadWidth / 2 - options.islandWidth / 2, 0, 0] }}
         fade={new Vector2(0, 1 - options.carLightsFade)}
-        color={options.colors.leftCars}
+        color1={options.colors.leftCars[0]}
+        color2={options.colors.leftCars[1]}
         side={-1}
       />
       {/* Right lights */}
@@ -116,7 +117,8 @@ const Scene = forwardRef<MyCanvasRef, {}>(function Scene(props, ref) {
         ref={carLightRRef}
         meshProps={{ position: [options.roadWidth / 2 + options.islandWidth / 2, 0, 0] }}
         fade={new Vector2(1, options.carLightsFade)}
-        color={options.colors.rightCars}
+        color1={options.colors.rightCars[0]}
+        color2={options.colors.rightCars[1]}
         side={1}
       />
 

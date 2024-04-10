@@ -49,8 +49,14 @@ export const options = {
     shoulderLines: 0x131318,
     brokenLines: 0x131318,
     /***  Only these colors can be an array ***/
-    leftCars: [0x1b5dd8, 0x5da4de, 0xabe2e8],
-    rightCars: [0xf2e8ce, 0xe6dcb1, 0xdecf8a],
+    leftCars: [
+      [0x1b5dd8, 0x5da4de, 0xabe2e8],
+      [0x7d0d1b, 0xa90519, 0xff102a],
+    ],
+    rightCars: [
+      [0xf2e8ce, 0xe6dcb1, 0xdecf8a],
+      [0xf1eece, 0xe6e2b1, 0xdfd98a],
+    ],
     sticks: [0xe2d6b4],
   },
 
