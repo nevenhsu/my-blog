@@ -23,13 +23,14 @@ import classes from './index.module.css'
 
 type BlogProps = {
   slug: string
+  lang: string
   initialData: Partial<PostData>
 }
 
-export default function Blog({ slug, initialData }: BlogProps) {
+export default function Blog({ slug, lang, initialData }: BlogProps) {
   usePasswordUrl(slug)
 
-  const [data] = useQuery<Partial<PostData>>(initialData, postQuery, { slug })
+  const [data] = useQuery<Partial<PostData>>(initialData, postQuery, { slug, lang })
   const { title, content, mainImage, publishedAt, readTime = 5 } = data
   const { locked, password = '' } = data
   const show = !_.isEmpty(data)

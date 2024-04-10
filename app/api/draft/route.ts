@@ -8,20 +8,21 @@ export async function GET(request: Request) {
   const secret = searchParams.get('secret')
   const slug = searchParams.get('slug')
   const type = searchParams.get('type')
+  const lang = searchParams.get('lang') || 'en'
 
-  let path = ''
+  let path = `/${lang}`
+
   switch (type) {
     case 'about': {
-      path = '/about'
+      path += '/about'
       break
     }
     case 'post': {
-      path = `/blog/${slug}`
+      path += `/blog/${slug}`
       break
     }
     case 'home':
     default: {
-      path = '/'
       break
     }
   }

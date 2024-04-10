@@ -11,7 +11,7 @@ export default async function BlogPage({
   const data = isEnabled ? {} : await getPostData(slug, lang)
   return (
     <>
-      <Blog slug={slug} initialData={data} />
+      <Blog slug={slug} lang={lang} initialData={data} />
     </>
   )
 }

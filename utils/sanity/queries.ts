@@ -216,7 +216,7 @@ export async function getPostsData(lang: string) {
 }
 
 export const aboutQuery = groq`
-*[_type=='about'][0]
+*[_type=='about' && lang==$lang][0]
 {
   ...,
   mainImage {
@@ -231,9 +231,9 @@ export const aboutQuery = groq`
 }
 `
 
-export async function getAboutData() {
+export async function getAboutData(lang: string) {
   try {
-    const data = await client.fetch<AboutData>(aboutQuery)
+    const data = await client.fetch<AboutData>(aboutQuery, { lang })
     return data
   } catch (err) {
     console.error(err)

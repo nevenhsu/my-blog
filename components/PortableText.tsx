@@ -26,11 +26,11 @@ import type { PortableTextBlock } from 'sanity'
 const myComponents: Partial<PortableTextReactComponents> = {
   block: {
     // customizing common block types
-    normal: ({ children }) => <Body mb={8}>{children}</Body>,
-    headline: ({ children }) => <Headline mb={24}>{children}</Headline>,
-    title: ({ children }) => <MyTitle mb={24}>{children}</MyTitle>,
-    subtitle: ({ children }) => <Subtitle mb={8}>{children}</Subtitle>,
-    caption: ({ children }) => <Caption mb={8}>{children}</Caption>,
+    normal: ({ children }) => <Body mb={10}>{children}</Body>,
+    headline: ({ children }) => <Headline mb={20}>{children}</Headline>,
+    title: ({ children }) => <MyTitle mb={20}>{children}</MyTitle>,
+    subtitle: ({ children }) => <Subtitle mb={10}>{children}</Subtitle>,
+    caption: ({ children }) => <Caption mb={10}>{children}</Caption>,
     small: ({ children }) => <Small>{children}</Small>,
     blockquote: ({ children }) => <blockquote>{children}</blockquote>,
     divider: ({ children }) => <Divider>{children}</Divider>,

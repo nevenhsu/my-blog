@@ -17,11 +17,12 @@ import type { AboutData } from '@/types/about'
 
 type AboutProps = {
   initialData: Partial<AboutData>
+  lang: string
 }
 
-export default function About({ initialData }: AboutProps) {
+export default function About({ initialData, lang }: AboutProps) {
   const matches = useMediaQuery('(min-width: 48em)')
-  const [data] = useQuery<Partial<AboutData>>(initialData, aboutQuery)
+  const [data] = useQuery<Partial<AboutData>>(initialData, aboutQuery, { lang })
 
   const renderCommends = () =>
     data.commends?.map((o, i) => <Commend key={`${o._key}-${i}`} data={o} />)

@@ -97,6 +97,14 @@ export default defineType({
       title: 'title',
       subtitle: 'description',
       media: 'mainImage.base',
+      hidden: 'hidden',
+    },
+    prepare(selection) {
+      const { hidden, title } = selection
+      return {
+        ...selection,
+        title: hidden ? `[Hidden] ${title}` : title,
+      }
     },
   },
 })

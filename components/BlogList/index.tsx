@@ -13,10 +13,11 @@ import type { PostData } from '@/types/post'
 
 type BlogListProps = {
   initialData: Array<PostData>
+  lang: string
 }
 
-export default function BlogList({ initialData }: BlogListProps) {
-  const [data] = useQuery<Array<PostData>>(initialData, postsQuery)
+export default function BlogList({ initialData, lang }: BlogListProps) {
+  const [data] = useQuery<Array<PostData>>(initialData, postsQuery, { lang })
 
   const {
     state: { viewportSize },

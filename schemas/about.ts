@@ -1,10 +1,12 @@
 import { defineField, defineType } from 'sanity'
+import { lang } from './fields/lang'
 
 export default defineType({
   name: 'about',
   title: 'About',
   type: 'document',
   fields: [
+    lang,
     defineField({
       name: 'title',
       title: 'Title',
@@ -54,12 +56,17 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
+      lang: 'lang',
       author: 'author.name',
       media: 'mainImage',
     },
-    prepare(selection: { author: string }) {
-      const { author } = selection
-      return { ...selection, subtitle: author && `by ${author}` }
+    prepare(selection) {
+      const { author, title, lang } = selection
+      return {
+        ...selection,
+        title: `[${lang.toUpperCase()}] ${title}`,
+        subtitle: author && `by ${author}`,
+      }
     },
   },
 })

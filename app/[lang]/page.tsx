@@ -16,7 +16,7 @@ export default async function Page({ params: { lang } }: { params: { lang: strin
         zIndex: 1,
       }}
     >
-      <Home initialData={data} />
+      <Home initialData={data} lang={lang} />
     </Box>
   )
 }

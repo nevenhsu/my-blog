@@ -1,4 +1,3 @@
-
 import { Iframe } from 'sanity-plugin-iframe-pane'
 import { SanityDocument } from 'sanity'
 import { publicEnv } from '@/utils/env'
@@ -8,7 +7,8 @@ import type { DefaultDocumentNodeResolver } from 'sanity/structure'
 function getPreviewUrl(doc: SanityDocument) {
   const url = new URL('/api/draft', publicEnv.baseUrl)
   const slug = doc?.slug?.current || ''
-  url.search = `type=${doc._type}&slug=${slug}`
+  const lang = doc?.lang || ''
+  url.search = `type=${doc._type}&slug=${slug}&lang=${lang}`
   return url.href
 }
 

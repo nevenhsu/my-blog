@@ -16,11 +16,16 @@ import { homeQuery } from '@/utils/sanity/queries'
 import classes from './index.module.css'
 import type { HomeData } from '@/types/home'
 
-export default function Home({ initialData }: { initialData: Partial<HomeData> }) {
+type HomeProps = {
+  initialData: Partial<HomeData>
+  lang: string
+}
+
+export default function Home({ initialData, lang }: HomeProps) {
   const ref = useRef(null)
   const canvasRef = useRef<MyCanvasRef>(null)
 
-  const [data] = useQuery<Partial<HomeData>>(initialData, homeQuery)
+  const [data] = useQuery<Partial<HomeData>>(initialData, homeQuery, { lang })
   const noData = _.isEmpty(data)
   const [show, setShow] = useState(false)
   const { viewportSize } = useAppContext().state
