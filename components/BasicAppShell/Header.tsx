@@ -2,27 +2,30 @@
 
 import clsx from 'clsx'
 import Link from 'next/link'
-import { MotionSlide } from '@/components/motion'
 import { useEffect } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from '@/navigation'
+import { useTranslations } from 'next-intl'
 import { modals } from '@mantine/modals'
-import { AppShell, Stack, Group, Box, Button, ActionIcon, Badge } from '@mantine/core'
+import { MotionSlide } from '@/components/motion'
+import { AppShell, Stack, Group, Box, Button, ActionIcon } from '@mantine/core'
+import { Badge, Menu, Divider } from '@mantine/core'
 import { useMediaQuery, useDisclosure } from '@mantine/hooks'
 import { usePreviousDifferent } from 'rooks'
 import { useAppContext } from '@/stores/AppContext'
 import UnderlineMotion from '@/components/motion/Underline'
 import Logo from '@/public/images/logo.svg'
 import classes from './index.module.css'
-import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'
+import { HiOutlineMenuAlt4, HiOutlineX, HiOutlineTranslate } from 'react-icons/hi'
 import type { ButtonProps } from '@mantine/core'
 
-type Menu = { name: string; href: string }
+type MenuItem = { name: string; href: '/' | '/blog' | '/about' }
 
 export default function Header() {
   const matches = useMediaQuery('(min-width: 48em)')
   const {
     state: { isPreview, viewportSize, scroll },
   } = useAppContext()
+  const t = useTranslations('Header')
 
   const previousScroll = usePreviousDifferent(scroll)
   const inContent = scroll.y > viewportSize.height
@@ -33,23 +36,48 @@ export default function Header() {
   const pathname = usePathname()
   const atBlog = pathname.startsWith('/blog')
 
-  const renderMenu = (onClick: (o: Menu) => void, props: ButtonProps) => {
-    return [
-      { name: 'Home', href: '/' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'About', href: '/about' },
-    ].map(o => (
+  const handlelang = (locale: string) => {
+    router.push(pathname, { locale })
+  }
+
+  const renderMenu = (onClick: (o: MenuItem) => void, props: ButtonProps) => {
+    const menu: MenuItem[] = [
+      { name: t('home'), href: '/' },
+      { name: t('blog'), href: '/blog' },
+      { name: t('about'), href: '/about' },
+    ]
+
+    return menu.map(o => (
       <Button
         key={o.name}
         variant="transparent"
         c="var(--mantine-color-text)"
         size="compact-sm"
         onClick={() => onClick(o)}
+        fw={500}
         {...props}
       >
         <UnderlineMotion>{o.name}</UnderlineMotion>
       </Button>
     ))
+  }
+
+  const renderLang = () => {
+    return (
+      <Menu shadow="md" position="bottom-end" width={120}>
+        <Menu.Target>
+          <ActionIcon variant="transparent" c="white">
+            <HiOutlineTranslate />
+          </ActionIcon>
+        </Menu.Target>
+
+        <Menu.Dropdown>
+          <Menu.Label>Language</Menu.Label>
+          <Menu.Item onClick={() => handlelang('en')}>English</Menu.Item>
+          <Menu.Item onClick={() => handlelang('zh')}>中文</Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+    )
   }
 
   useEffect(() => {
@@ -62,7 +90,7 @@ export default function Header() {
         withCloseButton: false,
         withinPortal: false,
         children: (
-          <Stack className="absolute-center" gap={32}>
+          <Stack className="absolute-center" gap={32} w="100%">
             {renderMenu(
               o => {
                 if (pathname != o.href) {
@@ -72,6 +100,16 @@ export default function Header() {
               },
               { fz: 20 }
             )}
+            <Box h={100} />
+            <Group className={classes.lang} justify="center">
+              <Button variant="transparent" c="dimmed" onClick={() => handlelang('en')}>
+                English
+              </Button>
+              <Divider orientation="vertical" />
+              <Button variant="transparent" c="dimmed" onClick={() => handlelang('zh')}>
+                中文
+              </Button>
+            </Group>
           </Stack>
         ),
         styles: {
@@ -108,6 +146,8 @@ export default function Header() {
               {renderMenu(o => (pathname != o.href ? router.push(o.href) : null), {
                 fz: { base: 16, lg: 18 },
               })}
+
+              {renderLang()}
             </Group>
           ) : (
             <ActionIcon pos="relative" c="white" variant="transparent" onClick={toggle}>

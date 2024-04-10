@@ -1,6 +1,6 @@
 :root {
   --font-default: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-  --font-title: var(--next-title), var(--font-default);
-  --font-body: var(--next-body), var(--font-default);
+  --font-title: var(--next-title), var(--next-tc), var(--font-default);
+  --font-body: var(--next-body), var(--next-tc), var(--font-default);
 }

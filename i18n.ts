@@ -7,6 +7,18 @@ export default getRequestConfig(async ({ locale }) => {
   if (!env.locales.includes(locale as any)) notFound()
 
   return {
-    // messages: (await import(`../messages/${locale}.json`)).default
+    messages: (await import(`./messages/${locale}.json`)).default,
   }
 })
+
+export const i18nConfig = {
+  // A list of all locales that are supported
+  locales: env.locales,
+
+  // Used when no locale matches
+  defaultLocale: 'en',
+
+  localePrefix: 'as-needed',
+
+  pathnames: { '/': '/', '/blog': '/blog', '/about': '/about' },
+} as const

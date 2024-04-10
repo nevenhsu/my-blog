@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { draftMode } from 'next/headers'
 import { ColorSchemeScript } from '@mantine/core'
 import { AppProvider } from '@/stores/AppContext'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
 import Providers from '@/components/providers/Providers'
 import BasicAppShell from '@/components/BasicAppShell'
 import { publicEnv } from '@/utils/env'
@@ -31,6 +32,7 @@ export default function RootLayout({
   params: { lang: string }
 }) {
   const { isEnabled } = draftMode()
+  const messages = useMessages()
 
   const renderShell = () => {
     return <BasicAppShell>{children}</BasicAppShell>
@@ -59,15 +61,17 @@ export default function RootLayout({
           overflowX: 'hidden',
         }}
       >
-        <AppProvider isPreview={isEnabled}>
-          <Providers>
-            {isEnabled ? (
-              <PreviewProvider token={env.sanityToken}>{renderShell()}</PreviewProvider>
-            ) : (
-              <>{renderShell()}</>
-            )}
-          </Providers>
-        </AppProvider>
+        <NextIntlClientProvider locale={lang} messages={messages}>
+          <AppProvider isPreview={isEnabled}>
+            <Providers>
+              {isEnabled ? (
+                <PreviewProvider token={env.sanityToken}>{renderShell()}</PreviewProvider>
+              ) : (
+                <>{renderShell()}</>
+              )}
+            </Providers>
+          </AppProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

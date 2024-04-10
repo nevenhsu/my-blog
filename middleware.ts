@@ -1,15 +1,7 @@
 import createMiddleware from 'next-intl/middleware'
-import { env } from '@/utils/env'
+import { i18nConfig } from './i18n'
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales: env.locales,
-
-  // Used when no locale matches
-  defaultLocale: 'en',
-
-  localePrefix: 'as-needed',
-})
+export default createMiddleware(i18nConfig)
 
 export const config = {
   matcher: [

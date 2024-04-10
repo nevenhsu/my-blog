@@ -28,3 +28,8 @@
 .header-out {
   transform: translateY(-100%);
 }
+
+.lang button {
+  font-weight: 400;
+  width: 96px;
+}
