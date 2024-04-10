@@ -2,9 +2,13 @@ import { draftMode } from 'next/headers'
 import Blog from '@/components/Blog'
 import { getSlugData, getPostData } from '@/utils/sanity/queries'
 
-export default async function BlogPage({ params: { slug } }: { params: { slug: string } }) {
+export default async function BlogPage({
+  params: { lang, slug },
+}: {
+  params: { lang: string; slug: string }
+}) {
   const { isEnabled } = draftMode()
-  const data = isEnabled ? {} : await getPostData(slug)
+  const data = isEnabled ? {} : await getPostData(slug, lang)
   return (
     <>
       <Blog slug={slug} initialData={data} />

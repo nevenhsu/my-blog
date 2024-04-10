@@ -21,7 +21,7 @@ import type { ButtonProps } from '@mantine/core'
 type MenuItem = { name: string; href: '/' | '/blog' | '/about' }
 
 export default function Header() {
-  const matches = useMediaQuery('(min-width: 48em)')
+  const matches = useMediaQuery('(min-width: 36em)')
   const {
     state: { isPreview, viewportSize, scroll },
   } = useAppContext()
@@ -67,7 +67,7 @@ export default function Header() {
       <Menu shadow="md" position="bottom-end" width={120}>
         <Menu.Target>
           <ActionIcon variant="transparent" c="white">
-            <HiOutlineTranslate />
+            <HiOutlineTranslate size={18} />
           </ActionIcon>
         </Menu.Target>
 

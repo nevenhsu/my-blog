@@ -3,31 +3,34 @@
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useElementSize } from '@mantine/hooks'
+import { useScreenQueryValue } from '@/hooks/useScreenQuery'
 import { Box, Group, Stack } from '@mantine/core'
 import { MyTitle, Body, Caption } from '@/components/Fonts'
 import SanityImage from '@/components/sanity/Image'
 import BorderGold from '@/public/images/border-gold.svg'
 import BorderGold2 from '@/public/images/border-gold-2.svg'
 import classes from './index.module.css'
-import type { NewsData } from '@/types/news'
+import type { PostData } from '@/types/post'
 
-export default function NewsCard({ data }: { data: Partial<NewsData> }) {
+export default function PostCard({ data }: { data: Partial<PostData> }) {
   const router = useRouter()
   const { ref, height } = useElementSize()
-  const { title, subtitle, asset, post } = data
+  const { title, description, slug, mainImage, categories } = data
+
+  const imageAsset = useScreenQueryValue(mainImage, 'asset')
 
   return (
     <>
       <Box
         ref={ref}
         className={clsx(classes.card, 'c-pointer')}
-        onClick={() => (post?.slug ? router.push(`/blog/${post.slug}`) : null)}
+        onClick={() => (slug ? router.push(`/blog/${slug.current}`) : null)}
       >
         {/*   Background Image  */}
         <Box className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}>
-          {asset ? (
+          {imageAsset ? (
             <Box className={classes.bg}>
-              <SanityImage image={asset} style={{ height: '100%' }} />
+              <SanityImage image={imageAsset} style={{ height: '100%' }} />
             </Box>
           ) : null}
         </Box>
@@ -35,11 +38,11 @@ export default function NewsCard({ data }: { data: Partial<NewsData> }) {
         <Stack className={classes.content} px={16} py={24} gap={20}>
           <MyTitle>{title}</MyTitle>
 
-          {asset ? (
+          {imageAsset ? (
             <Box pos="relative">
               <>
                 <Box className={classes.imgBox}>
-                  <SanityImage image={asset} />
+                  <SanityImage image={imageAsset} />
                 </Box>
                 <BorderGold2
                   className="absolute-center pointer-events-none"
@@ -50,12 +53,12 @@ export default function NewsCard({ data }: { data: Partial<NewsData> }) {
             </Box>
           ) : null}
 
-          <Body>{subtitle}</Body>
+          <Body lineClamp={3}>{description}</Body>
 
           <Group gap={8}>
-            {post?.categories.map(e => (
-              <Caption key={e} className={classes.label} bg="blueGray.6">
-                {e}
+            {categories?.map(e => (
+              <Caption key={e.title} className={classes.label} bg="blueGray.6">
+                {e.title}
               </Caption>
             ))}
           </Group>

@@ -1,24 +1,19 @@
 .bg {
   position: absolute;
   width: 100dvw;
-  pointer-events: none;
-  z-index: -1;
 }
 
-.bg::before {
-  content: ' ';
-  background: url('/images/pattern.png') repeat;
-  background-size: 100px;
-  position: absolute;
+.cover {
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0.1;
-  pointer-events: none;
+  overflow: hidden;
 }
 
-.image img {
+.cover div {
+  height: 100%;
+}
+
+.cover img {
   display: block;
 }
 

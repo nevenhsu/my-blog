@@ -12,7 +12,6 @@ import lights from './types/lights'
 import pattern from './types/pattern'
 import href from './types/href'
 import socialMedia from './types/socialMedia'
-import news from './types/news'
 import blockContent from './types/blockContent'
 import content from './types/content'
 import home from './home'
@@ -44,7 +43,6 @@ export const schemaTypes = [
   pattern,
   href,
   socialMedia,
-  news,
   post,
   rwd,
   space,

@@ -4,7 +4,7 @@ import BlogList from '@/components/BlogList'
 
 export default async function BlogPage({ params: { lang } }: { params: { lang: string } }) {
   const { isEnabled } = draftMode()
-  const data = isEnabled ? {} : await getPostsData()
+  const data = isEnabled ? {} : await getPostsData(lang)
 
   return <BlogList initialData={data} />
 }

@@ -3,17 +3,17 @@
 import clsx from 'clsx'
 import { useScreenQueryValue } from '@/hooks/useScreenQuery'
 import { useElementSize } from '@mantine/hooks'
-import { Box, Grid, Group, Stack } from '@mantine/core'
-import { Caption, MyTitle, Body } from '@/components/Fonts'
+import { Box, Grid, Stack } from '@mantine/core'
+import { MyTitle, Body } from '@/components/Fonts'
+import BlogInfo from './BlogInfo'
 import SanityImage from '@/components/sanity/Image'
-import { formatDate } from '@/utils/helper'
 import BorderGold from '@/public/images/border-gold.svg'
 import BorderGold2 from '@/public/images/border-gold-2.svg'
 import type { PostData } from '@/types/post'
 import classes from './index.module.css'
 
 export function BlogCard({ data }: { data: Partial<PostData> }) {
-  const { publishedAt, mainImage, readTime = 5 } = data
+  const { mainImage, publishedAt, readTime = 5 } = data
 
   const imageAsset = useScreenQueryValue(mainImage, 'asset')
   const { ref, height } = useElementSize()
@@ -41,15 +41,7 @@ export function BlogCard({ data }: { data: Partial<PostData> }) {
         <Grid columns={6} gutter={0}>
           <Grid.Col span={4}>
             <Stack pr={{ base: 16, sm: 24 }}>
-              <Group c="dimmed" gap={8}>
-                {publishedAt ? (
-                  <>
-                    <Caption>{formatDate(publishedAt)}</Caption>
-                    <Caption>·</Caption>
-                  </>
-                ) : null}
-                <Caption>{`${readTime} min read`}</Caption>
-              </Group>
+              <BlogInfo publishedAt={publishedAt} readTime={readTime} />
               <MyTitle>{data.title}</MyTitle>
               <Body lineClamp={2}>{data.description}</Body>
             </Stack>

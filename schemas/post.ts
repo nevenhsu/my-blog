@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { getRwdField } from '@/utils/sanity/getRwdField'
+import { lang } from './fields/lang'
+import { isPostUnique } from './lib/isPostUnique'
 
 export default defineType({
   name: 'post',
@@ -10,6 +12,11 @@ export default defineType({
     { name: 'time', title: 'Time', options: { collapsible: false, columns: 2 } },
   ],
   fields: [
+    defineField({
+      name: 'hidden',
+      type: 'boolean',
+    }),
+    lang,
     defineField({
       name: 'title',
       title: 'Title',
@@ -22,6 +29,7 @@ export default defineType({
       options: {
         source: 'title',
         maxLength: 96,
+        isUnique: isPostUnique,
       },
     }),
     defineField({
@@ -53,11 +61,6 @@ export default defineType({
         { title: 'Main Image', name: 'mainImage' }
       )
     ),
-    defineField({
-      title: 'Background (css)',
-      name: 'background',
-      type: 'string',
-    }),
     defineField({
       name: 'author',
       title: 'Author',

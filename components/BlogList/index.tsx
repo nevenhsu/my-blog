@@ -2,9 +2,11 @@
 
 import _ from 'lodash'
 import useQuery from '@/hooks/useQuery'
+import { useAppContext } from '@/stores/AppContext'
 import { postsQuery } from '@/utils/sanity/queries'
 import { Box, Stack } from '@mantine/core'
 import { BlogCard } from '@/components/BlogCard'
+import PostCard from '@/components/PostCard'
 import RwdLayout from '@/components/Rwd/Layout'
 import classes from './index.module.css'
 import type { PostData } from '@/types/post'
@@ -15,6 +17,12 @@ type BlogListProps = {
 
 export default function BlogList({ initialData }: BlogListProps) {
   const [data] = useQuery<Array<PostData>>(initialData, postsQuery)
+
+  const {
+    state: { viewportSize },
+  } = useAppContext()
+
+  const isMobile = viewportSize.width < 576
 
   return (
     <RwdLayout w={{ base: '100%', lg: 992 }}>
@@ -32,7 +40,13 @@ export default function BlogList({ initialData }: BlogListProps) {
 
       <Stack gap={24}>
         {_.map(data, (post, i) => (
-          <BlogCard key={post.slug.current} data={post} />
+          <>
+            {isMobile ? (
+              <PostCard key={post.slug.current} data={post} />
+            ) : (
+              <BlogCard key={post.slug.current} data={post} />
+            )}
+          </>
         ))}
       </Stack>
 

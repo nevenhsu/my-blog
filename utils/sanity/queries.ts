@@ -9,7 +9,7 @@ import type { AboutData } from '@/types/about'
 const assetQuery = groq`
 asset {
   ...,
-  "lqip": @->metadata.lqip
+  "lqip": @->metadata.lqip,
 },
 lottie {
   ...,
@@ -30,6 +30,21 @@ const imageQuery = groq`
 *[_id == $id][0] 
 `
 
+const postDataQuery = groq`
+  ...,
+  categories[]->,
+  mainImage {
+    ...,
+    base { ..., ${assetQuery} },
+    xs { ..., ${assetQuery} },
+    sm { ..., ${assetQuery} },
+    md { ..., ${assetQuery} },
+    lg { ..., ${assetQuery} },
+    xl { ..., ${assetQuery} }
+  },
+  ${avatarQuery},
+`
+
 export async function getImageData(id: string) {
   try {
     const data = await client.fetch<ImageData>(imageQuery, { id })
@@ -43,14 +58,9 @@ export const homeQuery = groq`
 *[_type=='home' && lang==$lang][0]
 {
   ...,
-  news[] {
-    ...,
-    post {
-      ...,
-      "slug": @->slug.current,
-      "categories": @->categories[]->title,
-    },
-    ${assetQuery}
+  posts[]-> {
+    ${postDataQuery}
+    "content": null,
   },
   gallery {
     ...,
@@ -169,32 +179,17 @@ const blockContent = groq`
 }
 `
 
-const postDataQuery = groq`
-  ...,
-  categories[]->,
-  mainImage {
-    ...,
-    base { ..., ${assetQuery} },
-    xs { ..., ${assetQuery} },
-    sm { ..., ${assetQuery} },
-    md { ..., ${assetQuery} },
-    lg { ..., ${assetQuery} },
-    xl { ..., ${assetQuery} }
-  },
-  ${avatarQuery},
-`
-
 export const postQuery = groq`
-*[_type=='post' && slug.current == $slug][0]
+*[_type=='post' && slug.current==$slug && lang==$lang][0]
 { 
   ${postDataQuery}
   content[] ${blockContent},
 }
 `
 
-export async function getPostData(slug: string) {
+export async function getPostData(slug: string, lang: string) {
   try {
-    const data = await client.fetch(postQuery, { slug })
+    const data = await client.fetch(postQuery, { slug, lang })
     return data
   } catch (err) {
     console.error(err)
@@ -203,16 +198,16 @@ export async function getPostData(slug: string) {
 }
 
 export const postsQuery = groq`
-*[_type=='post'] | order(publishedAt desc)
+*[_type=='post' && lang==$lang && hidden!=true] | order(publishedAt desc)
 { 
   ${postDataQuery} 
   "content": null
 }
 `
 
-export async function getPostsData() {
+export async function getPostsData(lang: string) {
   try {
-    const data = await client.fetch(postsQuery)
+    const data = await client.fetch(postsQuery, { lang })
     return data
   } catch (err) {
     console.error(err)

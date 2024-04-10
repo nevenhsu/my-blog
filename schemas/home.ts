@@ -68,10 +68,9 @@ export default defineType({
       fieldset: 'news',
     }),
     defineField({
-      name: 'news',
-      title: 'News',
+      name: 'posts',
       type: 'array',
-      of: [{ type: 'news' }],
+      of: [{ type: 'reference', to: { type: 'post' } }],
     }),
     defineField({
       name: 'galleryTitle',
@@ -97,10 +96,11 @@ export default defineType({
   preview: {
     select: {
       titles: 'titles',
+      lang: 'lang',
     },
     prepare(selection) {
-      const { titles } = selection
-      return { title: 'Home', subtitle: titles.join(', ') }
+      const { titles, lang } = selection
+      return { title: `[${lang.toUpperCase()}] Home`, subtitle: titles.join(', ') }
     },
   },
 })

@@ -9,7 +9,7 @@ import { Box, SimpleGrid } from '@mantine/core'
 import { Subtitle } from '@/components/Fonts'
 import RwdBlock from '@/components/Rwd/Block'
 import MainVisual from './MainVisual'
-import NewsCard from '@/components/NewsCard'
+import PostCard from '@/components/PostCard'
 import Gallery from './Gallery'
 import MyCanvas, { type MyCanvasRef } from '@/components/threejs/MyCanvas'
 import { homeQuery } from '@/utils/sanity/queries'
@@ -88,8 +88,8 @@ export default function Home({ initialData }: { initialData: Partial<HomeData> }
             px={{ base: 24, sm: 40 }}
             mx="auto"
           >
-            {data.news?.map(i => (
-              <NewsCard key={i._key} data={i} />
+            {data.posts?.map(i => (
+              <PostCard key={i._id} data={i} />
             ))}
           </SimpleGrid>
 

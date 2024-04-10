@@ -8,7 +8,7 @@ export function Headline(props: TitleProps) {
 }
 
 export function MyTitle(props: TitleProps) {
-  return <Title fz={{ base: 26, lg: 32 }} {...props} />
+  return <Title fz={{ base: 24, lg: 30 }} {...props} />
 }
 
 export function Subtitle(props: TitleProps) {

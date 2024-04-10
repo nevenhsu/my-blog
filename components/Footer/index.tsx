@@ -36,7 +36,7 @@ export default function Footer({ initialData }: { initialData: Partial<FooterDat
         {email ? (
           <Subtitle
             className="c-pointer"
-            mb={40}
+            mb={48}
             onClick={() => (window.location.href = `mailto:${email}`)}
           >
             {email}

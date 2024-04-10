@@ -1,9 +1,8 @@
-import type { NewsData } from './news'
-import type { SanityArray } from './common'
 import type { GalleryDataArray } from './gallery'
 import type { LightsData } from './lights'
 import type { PatternData } from './pattern'
 import type { HrefData } from './href'
+import type { PostData } from './post'
 
 export type HomeData = {
   header: string
@@ -16,7 +15,7 @@ export type HomeData = {
   captionHref: HrefData
   newsTitle: string
   arrowText: string
-  news: SanityArray<NewsData>
+  posts: Array<Omit<PostData, 'content'> & { _id: string }>
   galleryTitle: string
   gallery: {
     images: GalleryDataArray

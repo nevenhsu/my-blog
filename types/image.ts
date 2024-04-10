@@ -7,7 +7,9 @@ type Palette = {
   population: number
 }
 
-export type ImageAssetData = SanityReference & { lqip?: string }
+export type ImageAssetData = SanityReference & {
+  lqip?: string
+}
 
 export type ImageData = {
   metadata: {

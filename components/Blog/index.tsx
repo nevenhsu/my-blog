@@ -11,8 +11,9 @@ import { useScreenQueryValue } from '@/hooks/useScreenQuery'
 import { motion } from 'framer-motion'
 import { MotionSlide, MotionBlur } from '@/components/motion'
 import { MyPortableText } from '@/components/PortableText'
-import { Box, Stack, Title, Space } from '@mantine/core'
-import { Body } from '@/components/Fonts'
+import { Box, Stack, Space } from '@mantine/core'
+import { MyTitle } from '@/components/Fonts'
+import BlogInfo from '@/components/BlogCard/BlogInfo'
 import RwdLayout from '@/components/Rwd/Layout'
 import SanityImage from '@/components/sanity/Image'
 import MyPassword from './MyPassword'
@@ -29,7 +30,7 @@ export default function Blog({ slug, initialData }: BlogProps) {
   usePasswordUrl(slug)
 
   const [data] = useQuery<Partial<PostData>>(initialData, postQuery, { slug })
-  const { title, description, content, mainImage, background } = data
+  const { title, content, mainImage, publishedAt, readTime = 5 } = data
   const { locked, password = '' } = data
   const show = !_.isEmpty(data)
 
@@ -72,7 +73,7 @@ export default function Blog({ slug, initialData }: BlogProps) {
 
   return (
     <>
-      <Box pos="relative" ta="center">
+      <Box pos="relative" h="30vh" style={{ pointerEvents: 'none' }}>
         {/*   Background   */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
           <Box
@@ -82,32 +83,36 @@ export default function Blog({ slug, initialData }: BlogProps) {
               base: `calc(100% + ${headerHeight.base}px)`,
               sm: `calc(100% + ${headerHeight.sm}px)`,
             }}
-            style={{ w: '100vw', pointerEvents: 'none', background }}
-          />
-        </motion.div>
-
-        <Space h={{ base: 48, sm: 80, lg: 40 }} />
-
-        {/*   Title   */}
-        <MotionSlide delay={2}>
-          <Title fz={{ base: 20, sm: 28, lg: 44 }} mb={8}>
-            {title}
-          </Title>
-        </MotionSlide>
-
-        <MotionSlide delay={2.25}>
-          <Body mb={40}>{description}</Body>
-        </MotionSlide>
-
-        {/*   Image   */}
-        <Box style={{ overflow: 'hidden' }}>
-          <MotionBlur delay={1}>
-            <Box className={classes.image}>
-              {imageAsset ? <SanityImage image={imageAsset} /> : null}
+            w="100vw"
+          >
+            {/*   Cover   */}
+            <Box className={clsx('absolute-center', classes.cover)}>
+              <MotionBlur delay={1}>
+                <Box>
+                  {imageAsset ? (
+                    <SanityImage image={imageAsset} style={{ height: '100%' }} />
+                  ) : null}
+                </Box>
+              </MotionBlur>
             </Box>
-          </MotionBlur>
-        </Box>
+          </Box>
+        </motion.div>
       </Box>
+
+      {/*   Title   */}
+
+      <Space h={{ base: 40, sm: 80 }} />
+
+      <RwdLayout mb={20}>
+        <MotionSlide delay={2}>
+          <Box w={{ base: '100%', sm: '66.66%', lg: '60%' }} mx="auto">
+            <Stack gap={24}>
+              <BlogInfo publishedAt={publishedAt} readTime={readTime} />
+              <MyTitle>{title}</MyTitle>
+            </Stack>
+          </Box>
+        </MotionSlide>
+      </RwdLayout>
 
       {/*   Content   */}
       <Box

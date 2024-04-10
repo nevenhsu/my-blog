@@ -18,7 +18,6 @@ export type PostData = SanitySlug & {
     lg?: { asset: ImageAssetData }
     xl?: { asset: ImageAssetData }
   }
-  background: string
   categories: CategoryData[]
   author: AvatarData
   publishedAt: string
