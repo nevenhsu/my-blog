@@ -1,3 +1,4 @@
+import { unstable_setRequestLocale } from 'next-intl/server'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import { draftMode } from 'next/headers'
@@ -31,6 +32,8 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: string }
 }) {
+  unstable_setRequestLocale(lang)
+
   const { isEnabled } = draftMode()
   const messages = useMessages()
 
