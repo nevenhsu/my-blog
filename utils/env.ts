@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 // private
 const env = {
   sanityToken: process.env.SANITY_API_READ_TOKEN,
@@ -24,11 +22,11 @@ const publicEnv = {
 export { env, publicEnv }
 
 function toBool(value: any) {
-  if (_.isNil(value)) {
+  if (value == undefined) {
     return undefined
   }
 
-  if (value === true || Number(value) >= 1 || _.lowerCase(value) === 'true') {
+  if (value === true || Number(value) >= 1 || `${value}`.toLowerCase() === 'true') {
     return true
   }
 
