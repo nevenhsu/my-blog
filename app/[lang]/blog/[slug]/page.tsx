@@ -3,6 +3,9 @@ import { draftMode } from 'next/headers'
 import Blog from '@/components/Blog'
 import { getSlugData, getPostData } from '@/utils/sanity/queries'
 
+// generateMetadata
+export * from './metadata'
+
 type BlogPageProps = {
   params: { lang: string; slug: string }
 }
