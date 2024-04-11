@@ -3,13 +3,14 @@ import { postMetaQuery } from '@/utils/sanity/queries'
 import type { PostData } from '@/types/post'
 import type { Metadata, ResolvingMetadata } from 'next'
 
-type Props = {
-  params: { lang: string; slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  {
+    params,
+    searchParams,
+  }: {
+    params: { lang: string; slug: string }
+    searchParams: { [key: string]: string | string[] | undefined }
+  },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug, lang } = params
