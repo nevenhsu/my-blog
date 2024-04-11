@@ -14,9 +14,6 @@ import { env } from '@/utils/env'
 // Ensuring code needed for live previewing drafts are only loaded when needed.
 const PreviewProvider = dynamic(() => import('@/components/providers/PreviewProvider'))
 
-// generateMetadata
-export * from './metadata'
-
 export const revalidate = 3600 // revalidate at most every hour
 
 export function generateStaticParams() {

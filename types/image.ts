@@ -7,8 +7,17 @@ type Palette = {
   population: number
 }
 
+type Dimensions = {
+  height: number
+  width: number
+  aspectRatio: number
+}
+
 export type ImageAssetData = SanityReference & {
   lqip?: string
+  dimensions?: Dimensions
+  mimeType?: string
+  url?: string
 }
 
 export type ImageData = {
@@ -26,11 +35,7 @@ export type ImageData = {
     }
     hasAlpha: false
     lqip: string
-    dimensions: {
-      height: number
-      width: number
-      aspectRatio: number
-    }
+    dimensions: Dimensions
   }
   sha1hash: string
   originalFilename: string

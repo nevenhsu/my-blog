@@ -58,8 +58,8 @@ export default function Blog({ slug, lang, initialData }: BlogProps) {
       <Box
         pos="relative"
         h={{
-          base: `calc(100dvh - ${headerHeight.base}px)`,
-          sm: `calc(100dvh - ${headerHeight.sm}px)`,
+          base: `calc(100vh - ${headerHeight.base}px)`,
+          sm: `calc(100vh - ${headerHeight.sm}px)`,
         }}
       >
         <Stack h="100%" justify="center" align="center">

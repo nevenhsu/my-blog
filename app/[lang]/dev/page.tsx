@@ -6,7 +6,7 @@ export default function DevPage() {
     <Box
       style={{
         width: '100vw',
-        height: '100dvh',
+        height: '100vh',
         overflowX: 'hidden',
       }}
     >

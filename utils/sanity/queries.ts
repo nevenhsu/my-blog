@@ -10,6 +10,9 @@ const assetQuery = groq`
 asset {
   ...,
   "lqip": @->metadata.lqip,
+  "url": @->url,
+  "mimeType": @->mimeType,
+  "dimensions": @->metadata.dimensions,
 },
 lottie {
   ...,
@@ -184,6 +187,14 @@ export const postQuery = groq`
 { 
   ${postDataQuery}
   content[] ${blockContent},
+}
+`
+
+export const postMetaQuery = groq`
+*[_type=='post' && slug.current==$slug && lang==$lang][0]
+{ 
+  ${postDataQuery}
+  "content": null
 }
 `
 

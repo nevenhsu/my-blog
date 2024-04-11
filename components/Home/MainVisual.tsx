@@ -24,14 +24,14 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
     <Box
       pos="relative"
       h={{
-        base: `calc(100dvh - ${headerHeight.base}px)`,
-        sm: `calc(100dvh - ${headerHeight.sm}px)`,
+        base: `calc(100vh - ${headerHeight.base}px)`,
+        sm: `calc(100vh - ${headerHeight.sm}px)`,
       }}
       px={{ base: 24, sm: 40 }}
     >
       <Stack h="100%" justify="center" align="center">
         <MotionSlide delay={2.5}>
-          <Text fw={400} fz={{ base: 22, sm: 32, lg: 50 }}>
+          <Text fw={200} fz={{ base: 22, sm: 30, lg: 50 }}>
             {data.header}
           </Text>
         </MotionSlide>
@@ -51,7 +51,7 @@ export default function MainVisual({ data, show }: { data: Partial<HomeData>; sh
       </Stack>
 
       {/*   Caption  */}
-      <Box pos="absolute" w="100%" left={0} bottom={{ base: 24, sm: 40 }} px={{ base: 24, sm: 40 }}>
+      <Box pos="absolute" w="100%" left={0} bottom={{ base: 64, sm: 40 }} px={{ base: 24, sm: 40 }}>
         <MotionSlide delay={3.2}>
           <Box pos="relative">
             <Caption>

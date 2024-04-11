@@ -42,7 +42,7 @@ export default function About({ initialData, lang }: AboutProps) {
             {/*   Image  */}
             {data.mainImage ? (
               <MotionBlur direction="left">
-                <Box maw={{ base: '100%', sm: '45vw', lg: '40vw' }} ml="auto">
+                <Box maw={{ base: '100%', sm: '40vw', lg: '33vw' }} ml="auto">
                   <SanityImage image={data.mainImage.asset} />
                 </Box>
               </MotionBlur>
@@ -74,23 +74,25 @@ export default function About({ initialData, lang }: AboutProps) {
           </Box>
         </RwdBlock>
 
-        <RwdBlock>
-          <MyTitle ta="center" mb={{ base: 40, sm: 100, lg: 80 }}>
-            {data.commendsTitle}
-          </MyTitle>
+        {data.commends?.length ? (
+          <RwdBlock>
+            <MyTitle ta="center" mb={{ base: 40, sm: 100, lg: 80 }}>
+              {data.commendsTitle}
+            </MyTitle>
 
-          <Box>
-            {matches ? (
-              <Box w="100%" maw={1200} mx="auto">
-                <RwdSimpleGrid cols={{ base: 2, lg: 3 }}>{renderCommends()}</RwdSimpleGrid>
-              </Box>
-            ) : (
-              <MyCarousel duration={data.duration || 10} withControls={false}>
-                {renderCommends()}
-              </MyCarousel>
-            )}
-          </Box>
-        </RwdBlock>
+            <Box>
+              {matches ? (
+                <Box w="100%" maw={1200} mx="auto">
+                  <RwdSimpleGrid cols={{ base: 2, lg: 3 }}>{renderCommends()}</RwdSimpleGrid>
+                </Box>
+              ) : (
+                <MyCarousel duration={data.duration || 10} withControls={false}>
+                  {renderCommends()}
+                </MyCarousel>
+              )}
+            </Box>
+          </RwdBlock>
+        ) : null}
       </>
     </RwdLayout>
   )
