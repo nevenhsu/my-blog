@@ -4,7 +4,7 @@ import type { TitleProps, TextProps } from '@mantine/core'
 type MyTextProps = TextProps & { children: any }
 
 export function Headline(props: TitleProps) {
-  return <Title fz={{ base: 36, lg: 48 }} {...props} />
+  return <Title fz={{ base: 36, lg: 46 }} {...props} />
 }
 
 export function MyTitle(props: TitleProps) {

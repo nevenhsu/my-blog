@@ -29,7 +29,7 @@ const myComponents: Partial<PortableTextReactComponents> = {
     normal: ({ children }) => <Body mb={10}>{children}</Body>,
     headline: ({ children }) => <Headline mb={20}>{children}</Headline>,
     title: ({ children }) => <MyTitle mb={20}>{children}</MyTitle>,
-    subtitle: ({ children }) => <Subtitle mb={10}>{children}</Subtitle>,
+    subtitle: ({ children }) => <Subtitle mb={20}>{children}</Subtitle>,
     caption: ({ children }) => <Caption mb={10}>{children}</Caption>,
     small: ({ children }) => <Small>{children}</Small>,
     blockquote: ({ children }) => <blockquote>{children}</blockquote>,
