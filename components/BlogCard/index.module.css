@@ -1,5 +1,6 @@
 .image {
   height: 100%;
+  min-height: 200px;
 }
 
 .image img {
@@ -36,5 +37,5 @@
 
 .content {
   position: relative;
-  padding: 16px;
+  padding: 24px;
 }

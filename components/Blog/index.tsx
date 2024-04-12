@@ -12,7 +12,7 @@ import { motion } from 'framer-motion'
 import { MotionSlide, MotionBlur } from '@/components/motion'
 import { MyPortableText } from '@/components/PortableText'
 import { Box, Stack, Space } from '@mantine/core'
-import { MyTitle } from '@/components/Fonts'
+import { Headline } from '@/components/Fonts'
 import BlogInfo from '@/components/BlogCard/BlogInfo'
 import RwdLayout from '@/components/Rwd/Layout'
 import SanityImage from '@/components/sanity/Image'
@@ -104,12 +104,12 @@ export default function Blog({ slug, lang, initialData }: BlogProps) {
 
       <Space h={{ base: 40, sm: 80 }} />
 
-      <RwdLayout mb={20}>
+      <RwdLayout>
         <MotionSlide delay={2}>
           <Box w={{ base: '100%', sm: '66.66%', lg: '60%' }} mx="auto">
             <Stack gap={24}>
-              <BlogInfo publishedAt={publishedAt} readTime={readTime} />
-              <MyTitle>{title}</MyTitle>
+              <BlogInfo data={data} />
+              <Headline>{title}</Headline>
             </Stack>
           </Box>
         </MotionSlide>
@@ -128,7 +128,7 @@ export default function Blog({ slug, lang, initialData }: BlogProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: isInit ? 0 : 2 }}
           >
-            <Box pos="relative" py={{ base: 40, sm: 60, lg: 80 }}>
+            <Box pos="relative" py={{ base: 40, sm: 60 }}>
               <Box w={{ base: '100%', sm: '66.66%', lg: '60%' }} mx="auto">
                 <MyPortableText content={content || []} />
               </Box>

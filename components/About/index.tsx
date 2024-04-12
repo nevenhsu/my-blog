@@ -14,6 +14,7 @@ import useQuery from '@/hooks/useQuery'
 import { aboutQuery } from '@/utils/sanity/queries'
 import { useMediaQuery } from '@mantine/hooks'
 import type { AboutData } from '@/types/about'
+import classes from './index.module.css'
 
 type AboutProps = {
   initialData: Partial<AboutData>
@@ -42,7 +43,7 @@ export default function About({ initialData, lang }: AboutProps) {
             {/*   Image  */}
             {data.mainImage ? (
               <MotionBlur direction="left">
-                <Box maw={{ base: '100%', sm: '40vw', lg: '33vw' }} ml="auto">
+                <Box className={classes.cover} maw={{ base: '100%', sm: '40vw', lg: '33vw' }}>
                   <SanityImage image={data.mainImage.asset} />
                 </Box>
               </MotionBlur>

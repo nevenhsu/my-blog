@@ -1,0 +1,9 @@
+.cover {
+  margin-left: auto;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.cover img {
+  display: block;
+}

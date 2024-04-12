@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { Box, Table, Divider } from '@mantine/core'
 import { Subtitle, Body } from '@/components/Fonts'
 import type { MTableData } from '@/types/mTable'
+import classes from './index.module.css'
 
 export function MTable({ data }: { data: Partial<MTableData> }) {
   const { thead, divider, layout, tbody, tbodyColor = 'dimmed' } = data || {}
@@ -28,6 +29,7 @@ export function MTable({ data }: { data: Partial<MTableData> }) {
       {noDividerTop ? null : <Divider />}
       <Box py={verticalSpacing}>
         <Table
+          className={classes.root}
           horizontalSpacing={_.round(horizontalSpacing / 2)}
           verticalSpacing={_.round(verticalSpacing / 2)}
           withRowBorders={Boolean(showDivider)}

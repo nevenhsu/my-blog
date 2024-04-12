@@ -6,6 +6,7 @@ import { MotionSlide } from '@/components/motion'
 import { px, Group } from '@mantine/core'
 import { MyTitle, Subtitle, Body } from '@/components/Fonts'
 import RwdBlock from '@/components/Rwd/Block'
+import UnderlineMotion from '@/components/motion/Underline'
 import PopoverIcon from './PopoverIcon'
 import DrawerIcon from './DrawerIcon'
 import { footerQuery } from '@/utils/sanity/queries'
@@ -34,13 +35,16 @@ export default function Footer({ initialData }: { initialData: Partial<FooterDat
         <Body mb={20}>{data?.description}</Body>
 
         {email ? (
-          <Subtitle
-            className="c-pointer"
-            mb={48}
-            onClick={() => (window.location.href = `mailto:${email}`)}
-          >
-            {email}
-          </Subtitle>
+          <UnderlineMotion>
+            <Subtitle
+              className="c-pointer"
+              mb={48}
+              onClick={() => (window.location.href = `mailto:${email}`)}
+              display="inline-block"
+            >
+              {email}
+            </Subtitle>
+          </UnderlineMotion>
         ) : null}
 
         <Group gap={24} justify="center">

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { Box, List, Divider } from '@mantine/core'
-import { Subtitle, Body } from '@/components/Fonts'
+import { Subtitle, Caption } from '@/components/Fonts'
 import {
   PiNumberCircleOneFill,
   PiNumberCircleTwoFill,
@@ -39,8 +39,8 @@ export function NumberList({ data }: { data: Partial<NumberListData> }) {
               {!noDivider && i == 0 ? <Divider /> : null}
               <Box py={20}>
                 <List.Item key={o._key} icon={<Icon size={20} />}>
-                  <Subtitle>{o.title}</Subtitle>
-                  <Body c="dimmed">{o.body}</Body>
+                  <Subtitle mb={10}>{o.title}</Subtitle>
+                  <Caption c="dimmed">{o.body}</Caption>
                 </List.Item>
               </Box>
               {!noDivider ? <Divider /> : null}

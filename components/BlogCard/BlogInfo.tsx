@@ -1,13 +1,10 @@
 import { Group } from '@mantine/core'
 import { Caption } from '@/components/Fonts'
 import { formatDate } from '@/utils/helper'
+import type { PostData } from '@/types/post'
 
-type BlogInfoProps = {
-  publishedAt?: string
-  readTime: number
-}
-
-export default function BlogInfo({ publishedAt, readTime }: BlogInfoProps) {
+export default function BlogInfo({ data }: { data: Partial<PostData> }) {
+  const { publishedAt, readTime = 5 } = data
   return (
     <>
       <Group c="dimmed" gap={8}>

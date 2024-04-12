@@ -9,11 +9,11 @@ export function TitleCard({ data }: { data: Partial<TitleCardData> }) {
   const { title, blockContent } = data || {}
   return (
     <Card className={classes.blockItem} style={{ borderRadius: '40px' }}>
-      <MyTitle px={40} py={32}>
+      <MyTitle fw={500} px={{ base: 20, sm: 32 }} py={24}>
         {title}
       </MyTitle>
       <Divider />
-      <Box px={40} py={32} pb={8}>
+      <Box px={{ base: 20, sm: 32 }} py={32} pb={20}>
         <MyPortableText content={blockContent || []} />
       </Box>
     </Card>

@@ -54,8 +54,8 @@ const myComponents: Partial<PortableTextReactComponents> = {
     number: ({ children }) => <List type="ordered">{children}</List>,
   },
   listItem: {
-    bullet: ({ children }) => <List.Item>{children}</List.Item>,
-    number: ({ children }) => <List.Item pb={8}>{children}</List.Item>,
+    bullet: ({ children }) => <List.Item mb={8}>{children}</List.Item>,
+    number: ({ children }) => <List.Item mb={8}>{children}</List.Item>,
   },
   marks: {
     highlight: ({ children }) => <Highlight>{children}</Highlight>,

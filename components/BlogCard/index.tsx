@@ -1,8 +1,8 @@
 'use client'
 
 import clsx from 'clsx'
+import { useRouter } from 'next/navigation'
 import { useScreenQueryValue } from '@/hooks/useScreenQuery'
-import { useElementSize } from '@mantine/hooks'
 import { Box, Grid, Stack } from '@mantine/core'
 import { MyTitle, Body } from '@/components/Fonts'
 import BlogInfo from './BlogInfo'
@@ -13,13 +13,16 @@ import type { PostData } from '@/types/post'
 import classes from './index.module.css'
 
 export function BlogCard({ data }: { data: Partial<PostData> }) {
-  const { mainImage, publishedAt, readTime = 5 } = data
+  const { mainImage, slug } = data
 
+  const router = useRouter()
   const imageAsset = useScreenQueryValue(mainImage, 'asset')
-  const { ref, height } = useElementSize()
 
   return (
-    <Box ref={ref} className={clsx(classes.card, 'c-pointer')}>
+    <Box
+      className={clsx(classes.card, 'c-pointer')}
+      onClick={() => (slug ? router.push(`/blog/${slug.current}`) : null)}
+    >
       <Box
         className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}
         style={{
@@ -40,8 +43,8 @@ export function BlogCard({ data }: { data: Partial<PostData> }) {
       <Box className={classes.content}>
         <Grid columns={6} gutter={0}>
           <Grid.Col span={4}>
-            <Stack pr={{ base: 16, sm: 24 }}>
-              <BlogInfo publishedAt={publishedAt} readTime={readTime} />
+            <Stack pr={{ base: 16, sm: 24 }} gap={20}>
+              <BlogInfo data={data} />
               <MyTitle>{data.title}</MyTitle>
               <Body lineClamp={2}>{data.description}</Body>
             </Stack>
@@ -52,16 +55,12 @@ export function BlogCard({ data }: { data: Partial<PostData> }) {
               <BorderGold2
                 className="absolute-center pointer-events-none"
                 width="100%"
-                style={{ height: Math.floor(height) - 32 }}
+                height="100%"
               />
             </Box>
           </Grid.Col>
         </Grid>
-        <BorderGold
-          className="absolute-center pointer-events-none"
-          width="100%"
-          style={{ height: Math.floor(height) }}
-        />
+        <BorderGold className="absolute-center pointer-events-none" width="100%" height="100%" />
       </Box>
     </Box>
   )

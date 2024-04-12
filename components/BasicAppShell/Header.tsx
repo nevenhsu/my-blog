@@ -100,7 +100,7 @@ export default function Header() {
               },
               { fz: 20 }
             )}
-            <Box h={100} />
+            <Box h={120} />
             <Group className={classes.lang} justify="center">
               <Button variant="transparent" c="dimmed" onClick={() => handlelang('en')}>
                 English
