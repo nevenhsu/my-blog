@@ -5,7 +5,7 @@ import { getRwdField } from '@/utils/sanity/getRwdField'
 export default defineType({
   title: 'RWD Block',
   name: 'rwd',
-  type: 'document',
+  type: 'object',
   fields: [
     defineField({ name: 'title', type: 'string' }),
     defineField(getRwdField({ type: 'layout' })),

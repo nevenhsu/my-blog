@@ -113,8 +113,7 @@ export default defineType({
     defineArrayMember({
       title: 'RWD',
       name: 'rwd',
-      type: 'reference',
-      to: [{ type: 'rwd' }],
+      type: 'rwd',
     }),
     defineArrayMember({
       title: 'Space',
