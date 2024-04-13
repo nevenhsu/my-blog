@@ -16,6 +16,7 @@ import { Headline } from '@/components/Fonts'
 import BlogInfo from '@/components/BlogCard/BlogInfo'
 import RwdLayout from '@/components/Rwd/Layout'
 import SanityImage from '@/components/sanity/Image'
+import MyAvatar from '@/components/sanity/MyAvatar'
 import MyPassword from './MyPassword'
 import { headerHeight } from '@/theme/config'
 import type { PostData } from '@/types/post'
@@ -31,7 +32,7 @@ export default function Blog({ slug, lang, initialData }: BlogProps) {
   usePasswordUrl(slug)
 
   const [data] = useQuery<Partial<PostData>>(initialData, postQuery, { slug, lang })
-  const { title, content, mainImage, publishedAt, readTime = 5 } = data
+  const { title, content, mainImage, author } = data
   const { locked, password = '' } = data
   const show = !_.isEmpty(data)
 
@@ -110,6 +111,7 @@ export default function Blog({ slug, lang, initialData }: BlogProps) {
             <Stack gap={24}>
               <BlogInfo data={data} />
               <Headline>{title}</Headline>
+              <MyAvatar data={author} />
             </Stack>
           </Box>
         </MotionSlide>

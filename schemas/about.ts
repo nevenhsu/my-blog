@@ -36,15 +36,14 @@ export default defineType({
       type: 'blockContent',
     }),
     defineField({
-      name: 'commendsTitle',
-      title: 'Commends Title',
+      name: 'membersTitle',
+      title: 'Members Title',
       type: 'string',
     }),
     defineField({
-      name: 'commends',
-      title: 'Commends',
+      name: 'members',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'commend' } }],
+      of: [{ type: 'member' }],
     }),
     defineField({
       name: 'duration',

@@ -1,6 +1,6 @@
 import type { PortableTextBlock } from 'sanity'
 import type { ImageAssetData } from './image'
-import type { CommendData } from './commend'
+import type { MemberData } from './member'
 import type { SanityArray } from './common'
 
 export type AboutData = {
@@ -11,7 +11,7 @@ export type AboutData = {
   mainImage: {
     asset: ImageAssetData
   }
-  commendsTitle: string
-  commends: SanityArray<CommendData>
+  membersTitle: string
+  members: SanityArray<MemberData>
   duration: number
 }

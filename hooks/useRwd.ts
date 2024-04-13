@@ -35,6 +35,7 @@ export default function useRwd<
     _.forEach(toKey, (v, k) => {
       temp[v] = getValue(k)
     })
+
     setResults(temp)
   }, [toKey, value, fallback])
 

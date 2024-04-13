@@ -3,4 +3,5 @@
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-title: var(--next-title), var(--next-tc), var(--font-default);
   --font-body: var(--next-body), var(--next-tc), var(--font-default);
+  --font-mono: var(--next-mono), var(--next-tc), var(--font-default);
 }

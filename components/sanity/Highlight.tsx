@@ -1,3 +1,5 @@
+import { Mark } from '@mantine/core'
+
 export default function Highlight({ children }: { children: React.ReactNode }) {
-  return <mark> {children}</mark>
+  return <Mark>{children}</Mark>
 }

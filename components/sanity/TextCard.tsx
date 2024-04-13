@@ -1,5 +1,5 @@
 import Card from '@/components/Card'
-import { MyTitle } from '@/components/Fonts'
+import { Subtitle } from '@/components/Fonts'
 import type { TextCardData } from '@/types/textCard'
 import classes from './index.module.css'
 
@@ -8,9 +8,9 @@ export function TextCard({ data }: { data: Partial<TextCardData> }) {
 
   return (
     <Card className={classes.blockItem} px={8} py={{ base: 24, sm: 32 }}>
-      <MyTitle className="relative-vertical" ta="center">
+      <Subtitle className="relative-vertical" ta="center">
         {title}
-      </MyTitle>
+      </Subtitle>
     </Card>
   )
 }

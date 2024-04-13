@@ -5,6 +5,7 @@ import { colors } from './colors'
 
 const titleFF = 'var(--font-title)'
 const bodyFF = 'var(--font-body)'
+const monoFF = 'var(--font-mono)'
 
 export const theme = createTheme({
   focusRing: 'never',
@@ -14,6 +15,7 @@ export const theme = createTheme({
   primaryColor: 'dark',
   colors,
   fontFamily: bodyFF,
+  fontFamilyMonospace: monoFF,
   headings: {
     fontFamily: titleFF,
     fontWeight: '700',

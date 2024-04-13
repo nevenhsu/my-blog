@@ -20,17 +20,18 @@ lottie {
 }
 `
 
-const avatarQuery = groq`
-avatar -> {
-  ...,
-  image {
-    ${assetQuery}
-  }
-}
-`
-
 const imageQuery = groq`
 *[_id == $id][0] 
+`
+
+const memberQuery = groq`
+  ...,
+  avatar-> {
+    ...,
+    image {
+      ${assetQuery}
+    }
+  }
 `
 
 const postDataQuery = groq`
@@ -45,7 +46,12 @@ const postDataQuery = groq`
     lg { ..., ${assetQuery} },
     xl { ..., ${assetQuery} }
   },
-  ${avatarQuery},
+  author-> {
+    ...,
+    image {
+      ${assetQuery}
+    }
+  },
 `
 
 export async function getImageData(id: string) {
@@ -142,6 +148,9 @@ _type == 'image' => {
   ...,
   ${assetQuery}
 },
+_type == 'member' => {
+  ${memberQuery}
+},
 _type == 'block' => {
   ...,
   markDefs[] {
@@ -169,7 +178,7 @@ const blockContent = groq`
   ...,
   ${contentRef},
   
-  _type == 'rwd' => @-> {
+  _type == 'rwd' => {
     ...,
     items[] {
       ...,
@@ -234,9 +243,8 @@ export const aboutQuery = groq`
     ...,
     ${assetQuery}
   },
-  commends[] -> {
-    ...,
-    ${avatarQuery}
+  members[] -> {
+    ${memberQuery}
   },
   body[] ${blockContent}
 }

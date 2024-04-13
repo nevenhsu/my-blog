@@ -20,7 +20,7 @@ import footer from './footer'
 import about from './about'
 import post from './post'
 import avatar from './avatar'
-import commend from './commend'
+import member from './types/member'
 import mTable from './types/mTable'
 import numberList from './types/numberList'
 import titleCard from './types/titleCard'
@@ -52,7 +52,7 @@ export const schemaTypes = [
   footer,
   about,
   avatar,
-  commend,
+  member,
   category,
   mTable,
   mCode,

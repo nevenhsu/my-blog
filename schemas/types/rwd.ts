@@ -20,6 +20,7 @@ export default defineType({
         { type: 'titleCard' },
         { type: 'contentCard' },
         { type: 'textCard' },
+        { type: 'member' },
         { type: 'iframe' },
         { type: 'mCode' },
       ],

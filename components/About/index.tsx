@@ -8,7 +8,7 @@ import RwdBlock from '@/components/Rwd/Block'
 import RwdSimpleGrid from '@/components/Rwd/SimpleGrid'
 import SanityImage from '@/components/sanity/Image'
 import { MyPortableText } from '@/components/PortableText'
-import Commend from '@/components/Commend'
+import { Member } from '@/components/sanity/Member'
 import MyCarousel from '@/components/Carousel'
 import useQuery from '@/hooks/useQuery'
 import { aboutQuery } from '@/utils/sanity/queries'
@@ -25,8 +25,8 @@ export default function About({ initialData, lang }: AboutProps) {
   const matches = useMediaQuery('(min-width: 48em)')
   const [data] = useQuery<Partial<AboutData>>(initialData, aboutQuery, { lang })
 
-  const renderCommends = () =>
-    data.commends?.map((o, i) => <Commend key={`${o._key}-${i}`} data={o} />)
+  const renderMembers = () =>
+    data.members?.map((o, i) => <Member key={`${o._key}-${i}`} data={o} />)
 
   if (!data) return null
 
@@ -75,20 +75,20 @@ export default function About({ initialData, lang }: AboutProps) {
           </Box>
         </RwdBlock>
 
-        {data.commends?.length ? (
+        {data.members?.length ? (
           <RwdBlock>
             <MyTitle ta="center" mb={{ base: 40, sm: 100, lg: 80 }}>
-              {data.commendsTitle}
+              {data.membersTitle}
             </MyTitle>
 
             <Box>
               {matches ? (
                 <Box w="100%" maw={1200} mx="auto">
-                  <RwdSimpleGrid cols={{ base: 2, lg: 3 }}>{renderCommends()}</RwdSimpleGrid>
+                  <RwdSimpleGrid cols={{ base: 2, lg: 3 }}>{renderMembers()}</RwdSimpleGrid>
                 </Box>
               ) : (
                 <MyCarousel duration={data.duration || 10} withControls={false}>
-                  {renderCommends()}
+                  {renderMembers()}
                 </MyCarousel>
               )}
             </Box>

@@ -14,7 +14,7 @@ import classes from './index.module.css'
 const fullWidthData: Partial<BreakPointData<{ w: string }>> = {
   base: { w: '100%' },
   sm: { w: 'calc(100vw - 80px)' },
-  lg: { w: '1200px' },
+  lg: { w: '1120px' },
 }
 
 export function RwdBlock({ data }: { data: Partial<RwdData> }) {
@@ -49,7 +49,7 @@ export function RwdBlock({ data }: { data: Partial<RwdData> }) {
     >
       <RwdSimpleGrid
         {...gridProps}
-        className={clsx({ ['relative-horizontal']: gridProps.width !== '100%' })}
+        className={clsx({ ['relative-horizontal']: gridProps.w !== '100%' })}
         cols={cols}
         verticalSpacing={verticalSpacing}
       >

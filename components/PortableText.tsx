@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextReactComponents } from '@portabletext/react'
-import { Headline, MyTitle, Subtitle, Body, Caption, Small } from '@/components/Fonts'
+import { Headline, MyTitle, Subtitle, Body, Caption, Small, Blockquote } from '@/components/Fonts'
 import { List } from '@mantine/core'
 import Divider from '@/components/sanity/Divider'
 import FullDivider from '@/components/sanity/FullDivider'
@@ -17,11 +17,13 @@ import {
   MySpace,
   PrismCode,
   MyLink,
+  Member,
   LottieImage,
   Iframe,
 } from '@/components/common'
 import UnderlineMotion from '@/components/motion/Underline'
 import type { PortableTextBlock } from 'sanity'
+import classes from './index.module.css'
 
 const myComponents: Partial<PortableTextReactComponents> = {
   block: {
@@ -32,7 +34,7 @@ const myComponents: Partial<PortableTextReactComponents> = {
     subtitle: ({ children }) => <Subtitle mb={20}>{children}</Subtitle>,
     caption: ({ children }) => <Caption mb={10}>{children}</Caption>,
     small: ({ children }) => <Small>{children}</Small>,
-    blockquote: ({ children }) => <blockquote>{children}</blockquote>,
+    blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
     divider: ({ children }) => <Divider>{children}</Divider>,
     fullDivider: ({ children }) => <FullDivider>{children}</FullDivider>,
   },
@@ -46,6 +48,10 @@ const myComponents: Partial<PortableTextReactComponents> = {
     contentCard: ({ value }) => <ContentCard data={value} />,
     textCard: ({ value }) => <TextCard data={value} />,
     space: ({ value }) => <MySpace data={value} />,
+    member: data => {
+      console.log('member', data)
+      return <Member data={data.value} />
+    },
     mCode: ({ value }) => <PrismCode data={value} />,
     iframe: ({ value }) => <Iframe {...value} />,
   },
@@ -54,8 +60,8 @@ const myComponents: Partial<PortableTextReactComponents> = {
     number: ({ children }) => <List type="ordered">{children}</List>,
   },
   listItem: {
-    bullet: ({ children }) => <List.Item mb={8}>{children}</List.Item>,
-    number: ({ children }) => <List.Item mb={8}>{children}</List.Item>,
+    bullet: ({ children }) => <List.Item className={classes.item}>{children}</List.Item>,
+    number: ({ children }) => <List.Item className={classes.item}>{children}</List.Item>,
   },
   marks: {
     highlight: ({ children }) => <Highlight>{children}</Highlight>,

@@ -1,4 +1,4 @@
-import { Title, Text } from '@mantine/core'
+import { Title, Text, Code } from '@mantine/core'
 import type { TitleProps, TextProps } from '@mantine/core'
 
 type MyTextProps = TextProps & { children: any }
@@ -25,4 +25,12 @@ export function Caption(props: MyTextProps) {
 
 export function Small(props: MyTextProps) {
   return <Text fz={8} {...props} />
+}
+
+export function Blockquote({ children }: { children: any }) {
+  return (
+    <Code px={{ base: 8, sm: 10 }} py={6} display="inline-block">
+      {children}
+    </Code>
+  )
 }

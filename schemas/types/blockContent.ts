@@ -134,6 +134,7 @@ export default defineType({
     defineArrayMember({ title: 'Title Card', name: 'titleCard', type: 'titleCard' }),
     defineArrayMember({ title: 'Content Card', name: 'contentCard', type: 'contentCard' }),
     defineArrayMember({ title: 'Text Card', name: 'textCard', type: 'textCard' }),
+    defineArrayMember({ title: 'Member', name: 'member', type: 'member' }),
     defineArrayMember({ title: 'Iframe', name: 'iframe', type: 'iframe' }),
     defineArrayMember({ title: 'Code', name: 'mCode', type: 'mCode' }),
   ],
