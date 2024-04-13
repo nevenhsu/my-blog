@@ -13,7 +13,7 @@ export default function MyAvatar({
   const { image, name, bio } = data || {}
 
   return (
-    <Group gap={12}>
+    <Group gap={12} wrap="nowrap">
       <Box
         w={{ base: 32, sm: 40 }}
         h={{ base: 32, sm: 40 }}
