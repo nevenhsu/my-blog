@@ -39,7 +39,7 @@ export function NumberList({ data }: { data: Partial<NumberListData> }) {
               {!noDivider && i == 0 ? <Divider /> : null}
               <Box py={20}>
                 <List.Item key={o._key} icon={<Icon size={20} />}>
-                  <Subtitle mb={10}>{o.title}</Subtitle>
+                  <Subtitle mb={8}>{o.title}</Subtitle>
                   <Caption c="dimmed">{o.body}</Caption>
                 </List.Item>
               </Box>

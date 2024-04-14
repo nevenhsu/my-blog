@@ -28,11 +28,11 @@ import classes from './index.module.css'
 const myComponents: Partial<PortableTextReactComponents> = {
   block: {
     // customizing common block types
-    normal: ({ children }) => <Body mb={10}>{children}</Body>,
-    headline: ({ children }) => <Headline mb={20}>{children}</Headline>,
-    title: ({ children }) => <MyTitle mb={20}>{children}</MyTitle>,
-    subtitle: ({ children }) => <Subtitle mb={20}>{children}</Subtitle>,
-    caption: ({ children }) => <Caption mb={10}>{children}</Caption>,
+    normal: ({ children }) => <Body mb={8}>{children}</Body>,
+    headline: ({ children }) => <Headline mb={8}>{children}</Headline>,
+    title: ({ children }) => <MyTitle mb={8}>{children}</MyTitle>,
+    subtitle: ({ children }) => <Subtitle mb={8}>{children}</Subtitle>,
+    caption: ({ children }) => <Caption mb={8}>{children}</Caption>,
     small: ({ children }) => <Small>{children}</Small>,
     blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
     divider: ({ children }) => <Divider>{children}</Divider>,

@@ -12,8 +12,7 @@ export default function MyDivider({ children }: { children: React.ReactNode }) {
         className={clsx({
           [classes['no-margining']]: !hasText,
         })}
-        mt={12}
-        mb={20}
+        my={12}
         label={children}
       />
     </>

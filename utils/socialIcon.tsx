@@ -6,6 +6,7 @@ import {
   FaWeixin,
   FaTelegram,
   FaLinkedin,
+  FaGithub,
 } from 'react-icons/fa6'
 import { BsLine } from 'react-icons/bs'
 import type { IconBaseProps } from 'react-icons'
@@ -19,6 +20,7 @@ export enum SocialIcon {
   Whatsapp = 'whatsapp',
   WeChat = 'wechat',
   X = 'x',
+  GitHub = 'github',
 }
 
 export function getIcon(icon?: string, props?: IconBaseProps) {
@@ -39,6 +41,8 @@ export function getIcon(icon?: string, props?: IconBaseProps) {
       return <BsLine {...props} />
     case SocialIcon.Linkedin:
       return <FaLinkedin {...props} />
+    case SocialIcon.GitHub:
+      return <FaGithub {...props} />
     default:
       return null
   }
@@ -62,6 +66,8 @@ export function getName(icon?: string) {
       return 'LINE'
     case SocialIcon.Linkedin:
       return 'LinkedIn'
+    case SocialIcon.GitHub:
+      return 'GitHub'
     default:
       return null
   }
