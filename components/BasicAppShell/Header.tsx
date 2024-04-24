@@ -48,17 +48,18 @@ export default function Header() {
     ]
 
     return menu.map(o => (
-      <Button
-        key={o.name}
-        variant="transparent"
-        c="var(--mantine-color-text)"
-        size="compact-sm"
-        onClick={() => onClick(o)}
-        fw={500}
-        {...props}
-      >
-        <UnderlineMotion>{o.name}</UnderlineMotion>
-      </Button>
+      <Link key={o.name} href={o.href}>
+        <Button
+          variant="transparent"
+          c="var(--mantine-color-text)"
+          size="compact-sm"
+          onClick={() => onClick(o)}
+          fw={500}
+          {...props}
+        >
+          <UnderlineMotion>{o.name}</UnderlineMotion>
+        </Button>
+      </Link>
     ))
   }
 
@@ -91,15 +92,7 @@ export default function Header() {
         withinPortal: false,
         children: (
           <Stack className="absolute-center" gap={32} w="100%">
-            {renderMenu(
-              o => {
-                if (pathname != o.href) {
-                  router.push(o.href)
-                }
-                toggle()
-              },
-              { fz: 20 }
-            )}
+            {renderMenu(o => toggle(), { fz: 20 })}
             <Box h={120} />
             <Group className={classes.lang} justify="center">
               <Button variant="transparent" c="dimmed" onClick={() => handlelang('en')}>
@@ -143,7 +136,7 @@ export default function Header() {
 
           {matches ? (
             <Group>
-              {renderMenu(o => (pathname != o.href ? router.push(o.href) : null), {
+              {renderMenu(o => null, {
                 fz: { base: 16, lg: 18 },
               })}
 

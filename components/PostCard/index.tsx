@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useElementSize } from '@mantine/hooks'
 import { useScreenQueryValue } from '@/hooks/useScreenQuery'
 import { Box, Group, Stack } from '@mantine/core'
@@ -13,19 +13,14 @@ import classes from './index.module.css'
 import type { PostData } from '@/types/post'
 
 export default function PostCard({ data }: { data: Partial<PostData> }) {
-  const router = useRouter()
   const { ref, height } = useElementSize()
   const { title, description, slug, mainImage, categories } = data
 
   const imageAsset = useScreenQueryValue(mainImage, 'asset')
 
   return (
-    <>
-      <Box
-        ref={ref}
-        className={clsx(classes.card, 'c-pointer')}
-        onClick={() => (slug ? router.push(`/blog/${slug.current}`) : null)}
-      >
+    <Link href={slug ? `/blog/${slug.current}` : ''}>
+      <Box ref={ref} className={classes.card}>
         {/*   Background Image  */}
         <Box className={clsx(classes.bgDiv, 'absolute-center', 'pointer-events-none')}>
           {imageAsset ? (
@@ -70,6 +65,6 @@ export default function PostCard({ data }: { data: Partial<PostData> }) {
           style={{ height: Math.floor(height) }}
         />
       </Box>
-    </>
+    </Link>
   )
 }

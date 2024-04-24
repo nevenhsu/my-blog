@@ -87,6 +87,7 @@ export default function Home({ initialData, lang }: HomeProps) {
           </RwdBlock>
 
           <SimpleGrid
+            className={classes.grid}
             spacing={40}
             cols={{ base: 1, sm: 2 }}
             w={{ base: '100%', lg: 1200 }}
