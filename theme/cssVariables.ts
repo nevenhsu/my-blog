@@ -11,5 +11,6 @@ export const resolver: CSSVariablesResolver = theme => ({
     '--mantine-color-text': theme.white,
     '--mantine-color-dimmed': 'var(--mantine-color-blueGray-2)',
     '--mantine-color-error': '#F6465D',
+    '--text-color': 'var(--mantine-color-white)',
   },
 })
